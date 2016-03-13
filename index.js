@@ -7,18 +7,33 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '2016-03-12'
+            value1: '2016-03-12',
+            value2: '2016-03',
+            value3: '2016',
         };
-    }
-    onChange(value){
-        this.setState({
-            value: value
-        })
     }
     render(){
         return <div>
-            <div>Current selected date: {this.state.value}</div>
-            <DatePicker value={this.state.value} onChange={this.onChange.bind(this)}/>
+            <div>Current selected date: {this.state.value1}</div>
+            <DatePicker
+                mode="day"
+                value={this.state.value1}
+                onChange={(v)=>{this.setState({value1: v})}}
+            />
+
+            <div>Current selected date: {this.state.value2}</div>
+            <DatePicker
+                mode="month"
+                value={this.state.value2}
+                onChange={(v)=>{this.setState({value2: v})}}
+            />
+
+            <div>Current selected date: {this.state.value3}</div>
+            <DatePicker
+                mode="year"
+                value={this.state.value3}
+                onChange={(v)=>{this.setState({value3: v})}}
+            />
         </div>
     }
 }

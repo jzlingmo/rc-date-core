@@ -6,7 +6,7 @@ import MonthPicker from './month/MonthPicker'
 import DayPicker from './day/DayPicker'
 import locale from './locale/zh-cn'
 
-import {getDate} from './utils/date'
+import {getDate, format} from './utils/date'
 
 export default class DatePicker extends React.Component {
 
@@ -29,16 +29,29 @@ export default class DatePicker extends React.Component {
         }
     }
 
+    getReturnValue(value){
+        let returnFormat = this.props.returnFormat;
+        let mode = this.props.mode;
+        const formatStr = 'yyyy-MM-dd hh:ss';
+        const lenMap = {
+            year: 4,
+            month: 7,
+            day: 10,
+            hour: 16
+        };
+        returnFormat = returnFormat || formatStr.substr(0, lenMap[mode]);
+        return format(value, returnFormat)
+    }
+
     onChange(value, view) {
         this.setState({
             innerValue: value
         });
         if (view === this.props.mode) {
-            let formatValue = value.format(this.props.returnFormat);
             this.setState({
-                value: new Date(formatValue)
+                value: new Date(value)
             });
-            this.props.onChange(formatValue)
+            this.props.onChange(this.getReturnValue(value))
         }
     }
 
@@ -116,7 +129,6 @@ export default class DatePicker extends React.Component {
 
 DatePicker.defaultProps = {
     mode: 'day',
-    returnFormat: 'yyyy-MM-dd'
 };
 
 DatePicker.propTypes = {

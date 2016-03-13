@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames';
-import {daysInMonth, getDate, compareDate} from '../utils/date'
-import {range} from '../utils/util'
 
 import Picker from '../common/Picker'
+import {daysInMonth, getDate, compareDate, format, add} from '../utils/date'
+import {range} from '../utils/util'
 
 const RowDay = 6;
 const ColDay = 7;
@@ -14,7 +14,6 @@ export default class DayPicker extends React.Component {
     }
 
     handleLabelClick() {
-        // to change view
         this.props.onChangeView('month');
     }
 
@@ -22,16 +21,12 @@ export default class DayPicker extends React.Component {
         this.props.onChange(date, this.props.view);
     }
 
-    prevDate() {
-        let innerValue = this.props.innerValue;
-        innerValue.setMonth(innerValue.getMonth() - 1);
-        this.props.onChange(new Date(innerValue));
+    prevNav() {
+        this.props.onChange(add(this.props.innerValue, -1, 'month'));
     }
 
-    nextDate() {
-        let innerValue = this.props.innerValue;
-        innerValue.setMonth(innerValue.getMonth() + 1);
-        this.props.onChange(new Date(innerValue));
+    nextNav() {
+        this.props.onChange(add(this.props.innerValue, 1, 'month'));
     }
 
     getWeeks() {
@@ -39,25 +34,24 @@ export default class DayPicker extends React.Component {
     }
 
     getDays() {
-        let days;
         let value = this.props.value;
         let innerValue = this.props.innerValue;
         let view = this.props.view;
-
         let year = innerValue.getFullYear();
         let month = innerValue.getMonth();
+
         let currentDaysCount = daysInMonth(year, month);
         let prevDaysCount = daysInMonth(year, month - 1);
         let prevCount = new Date(year, month).getDay();
         let nextCount = RowDay * ColDay - currentDaysCount - prevCount;
-        days = range(prevDaysCount - prevCount, prevCount).map(day => {
+        let days = range(prevDaysCount - prevCount, prevCount).map(day => {
             return {
                 value: new Date(year, month - 1, day),
                 selected: false,
                 disabled: false,
             }
         }).concat(range(1, currentDaysCount).map(day => {
-            let date = new Date(year, month, day)
+            let date = new Date(year, month, day);
             return {
                 value: date,
                 selected: compareDate(date, value, view),
@@ -81,48 +75,60 @@ export default class DayPicker extends React.Component {
     }
 
     renderWeeks() {
-        return <div className="weeks">
-            {this.getWeeks().map(num =>
-                <span className="day" key={num}>{num}</span>
-            )}
-        </div>
+        return (
+            <div className="weeks">
+                {this.getWeeks().map(num =>
+                    <span className="day" key={num}>{num}</span>
+                )}
+            </div>
+        )
     }
 
-    renderDays() {
-        return <div className="rcdate-body">
-            {this.getDays().map((days, idx) =>
-                <div key={idx} className="rcdate-row">
-                    {days.map((day, idx) =>
-                        <Picker key={idx}
-                            {...day}
-                                view={this.props.view}
-                                onClick={this.onChange.bind(this)}
-                                locale={this.props.locale}
-                        />
-                    )}
-                </div>
-            )}
-        </div>
-    }
-
-    render() {
-        return <div className="rcdate-container">
+    renderHead() {
+        return (
             <div className="rcdate-head">
                 <div className="rcdate-display">
                     <div className="rcdate-btn btn-left"
-                         onClick={this.prevDate.bind(this)}>
+                         onClick={this.prevNav.bind(this)}>
                         &lt; </div>
                     <div className="rcdate-label"
                          onClick={this.handleLabelClick.bind(this)}>
-                        {this.props.innerValue.format('yyyy-MM')} </div>
+                        {format(this.props.innerValue, 'yyyy-MM')} </div>
                     <div className="rcdate-btn btn-right"
-                         onClick={this.nextDate.bind(this)}>
+                         onClick={this.nextNav.bind(this)}>
                         &gt; </div>
                 </div>
                 {this.renderWeeks()}
             </div>
-            {this.renderDays()}
-        </div>
+        )
+    }
+
+    renderBody() {
+        return (
+            <div className="rcdate-body">
+                {this.getDays().map((items, idx) =>
+                    <div key={idx} className="rcdate-row">
+                        {items.map((item, idx) =>
+                            <Picker {...item}
+                                key={idx}
+                                view={this.props.view}
+                                onClick={this.onChange.bind(this)}
+                                locale={this.props.locale}
+                            />
+                        )}
+                    </div>
+                )}
+            </div>
+        )
+    }
+
+    render() {
+        return (
+            <div className="rcdate-container">
+                {this.renderHead()}
+                {this.renderBody()}
+            </div>
+        )
     }
 }
 
