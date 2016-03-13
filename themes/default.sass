@@ -1,0 +1,139 @@
+@import "vars"
+
+.rcdate
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  display: inline-block
+  margin-left: 5px
+  margin-top: 5px
+  font-size: 14px
+  color: #cfcfcf
+  .rcdate-container
+    width: $containerWidth
+    border: $containerBorder
+    border-radius: $radius
+    background-color: $containerBg
+
+  .rcdate-head
+    background-color: #555
+    border-top-left-radius: $radius
+    border-top-right-radius: $radius
+    border-bottom: 1px solid #444
+
+    .weeks
+      height: 20px
+      line-height: 20px
+      margin-top: -4px
+      text-align: center
+      padding: 0.5em
+      .day
+        float: left
+        width: ( 100% / 7 )
+        cursor: default
+
+    .rcdate-display
+      position: relative
+      height: $navHeight
+      padding: 5px
+      text-align: center
+      &,.rcdate-label,.rcdate-btn
+        line-height: $navHeight - 2 * $btnPadding
+
+      .rcdate-label
+        display: inline-block
+        width: 80px
+        padding: 4px
+        text-align: center
+        cursor: pointer
+        &:hover
+          background-color: #333
+
+        &.fixed:hover
+          background-color: transparent
+          cursor: default
+
+      .rcdate-btn
+        position: absolute
+        top: 5px
+        width: 35px
+        padding: 4px
+        border-radius: $radius
+        text-align: center
+        &.btn-left
+          left: 5px
+
+        &.btn-right
+          right: 5px
+
+  .rcdate-body
+    padding: 0.5em
+    padding-bottom: 0.3em
+    font-size: 12px
+
+  .rcdate-row
+    display: inline-block
+    margin-top: 2px
+    width: 100%
+
+  .rcdate-picker
+    display: block
+    float: left
+    color: $pickerColor
+    text-align: center
+    border-radius: $radius
+    cursor: pointer
+
+  .rcdate-picker.day
+    width: ( 100% / 7 )
+    height: 24px
+    line-height: 24px
+
+  .rcdate-picker.month
+    width: 23%
+    margin: 1%
+    height: 55px
+    align: center
+    line-height: 52px
+
+  .rcdate-picker.year
+    width: 23%
+    margin: 1%
+    height: 55px
+    align: center
+    line-height: 52px
+
+  .rcdate-picker:hover
+    background-color: $pickerHover
+
+  .rcdate-picker.selected
+    color: $selectedPickerColor
+    background-color: $selectedPickerBg
+
+  .rcdate-picker.current
+    color: $currentPickerColor
+
+  .rcdate-picker.selected.current
+    color: $selectedCurrentPickerColor
+
+  .rcdate-picker.disabled
+    color: $pickerDisabled
+
+  .rcdate-picker.disabled:hover
+    background-color: $pickerDisabledHover
+    cursor: default
+
+  .rcdate-btn
+    display: block
+    padding: 4px
+    text-align: center
+    border-radius: $radius
+    cursor: pointer
+
+  .rcdate-btn:hover
+    background-color: $pickerHover
+
+
