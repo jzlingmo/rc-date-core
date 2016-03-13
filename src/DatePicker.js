@@ -29,11 +29,11 @@ export default class DatePicker extends React.Component {
         }
     }
 
-    onChange(value) {
+    onChange(value, view) {
         this.setState({
             innerValue: value
         });
-        if (this.state.view === this.props.mode) {
+        if (view === this.props.mode) {
             let formatValue = value.format(this.props.returnFormat);
             this.setState({
                 value: new Date(formatValue)

@@ -18,8 +18,20 @@ export default class DayPicker extends React.Component {
         this.props.onChangeView('month');
     }
 
-    onChange(date) { // day changed
-        this.props.onChange(date);
+    onChange(date) {
+        this.props.onChange(date, this.props.view);
+    }
+
+    prevDate() {
+        let innerValue = this.props.innerValue;
+        innerValue.setMonth(innerValue.getMonth() - 1);
+        this.props.onChange(new Date(innerValue));
+    }
+
+    nextDate() {
+        let innerValue = this.props.innerValue;
+        innerValue.setMonth(innerValue.getMonth() + 1);
+        this.props.onChange(new Date(innerValue));
     }
 
     getWeeks() {
@@ -30,7 +42,7 @@ export default class DayPicker extends React.Component {
         let days;
         let value = this.props.value;
         let innerValue = this.props.innerValue;
-        let view  = this.props.view;
+        let view = this.props.view;
 
         let year = innerValue.getFullYear();
         let month = innerValue.getMonth();
@@ -82,7 +94,7 @@ export default class DayPicker extends React.Component {
                 <div key={idx} className="rcdate-row">
                     {days.map((day, idx) =>
                         <Picker key={idx}
-                                {...day}
+                            {...day}
                                 view={this.props.view}
                                 onClick={this.onChange.bind(this)}
                                 locale={this.props.locale}
@@ -98,13 +110,13 @@ export default class DayPicker extends React.Component {
             <div className="rcdate-head">
                 <div className="rcdate-display">
                     <div className="rcdate-btn btn-left"
-                         onClick={this.props.prevDate}>
+                         onClick={this.prevDate.bind(this)}>
                         &lt; </div>
                     <div className="rcdate-label"
                          onClick={this.handleLabelClick.bind(this)}>
                         {this.props.innerValue.format('yyyy-MM')} </div>
                     <div className="rcdate-btn btn-right"
-                         onClick={this.props.nextDate}>
+                         onClick={this.nextDate.bind(this)}>
                         &gt; </div>
                 </div>
                 {this.renderWeeks()}
