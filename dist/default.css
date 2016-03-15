@@ -84,13 +84,11 @@
     width: 23%;
     margin: 1%;
     height: 55px;
-    align: center;
     line-height: 52px; }
   .rcdate .rcdate-picker.year {
     width: 23%;
     margin: 1%;
     height: 55px;
-    align: center;
     line-height: 52px; }
   .rcdate .rcdate-picker:hover {
     background-color: #333; }

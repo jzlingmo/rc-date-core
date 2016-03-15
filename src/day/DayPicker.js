@@ -2,12 +2,13 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames';
 
 import Picker from '../common/Picker'
+import PickerWrapper from '../common/PickerWrapper'
 import {daysInMonth, getDate, compareDate, format, add} from '../utils/date'
 import {range} from '../utils/util'
 
 const RowDay = 6;
 const ColDay = 7;
-export default class DayPicker extends React.Component {
+class DayPicker extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,6 +20,9 @@ export default class DayPicker extends React.Component {
 
     onChange(date) {
         this.props.onChange(date, this.props.view);
+        if (this.compareView(this.props.view, this.props.mode) > 0) {
+            this.props.onChangeView(this.getNextView(this.props.view));
+        }
     }
 
     prevNav() {
@@ -139,10 +143,13 @@ DayPicker.propTypes = {
     onChangeView: PropTypes.func,
     prevDate: PropTypes.func,
     nextDate: PropTypes.func,
-    value: PropTypes.any, // todo
-    innerValue: PropTypes.any, // todo
+    value: PropTypes.any,
+    innerValue: PropTypes.instanceOf(Date),
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     view: PropTypes.string,
-    locale: PropTypes.any // todo
+    mode: PropTypes.string,
+    locale: PropTypes.object
 };
+
+export default PickerWrapper(DayPicker)

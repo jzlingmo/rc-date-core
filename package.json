@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/jzlingmo/rc-date-core#readme",
   "dependencies": {
-    "classnames": "~2.2.3"
+    "classnames": "~2.2.3",
+    "object-assign": "~4.0.1"
   },
   "devDependencies": {
     "babel-core": "~6.6.0",

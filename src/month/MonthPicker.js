@@ -2,29 +2,36 @@ import React, {PropTypes} from 'react'
 import cx from 'classnames';
 
 import Picker from '../common/Picker'
+import PickerWrapper from '../common/PickerWrapper'
+import ViewMixin from '../common/ViewMixin'
 import {compareDate, format, add} from '../utils/date'
 
 const RowDay = 3;
 const ColDay = 4;
-export default class MonthPicker extends React.Component {
+
+class MonthPicker extends React.Component {
     constructor(props) {
         super(props);
     }
 
     prevNav() {
-        this.props.onChange(add(this.props.innerValue, 1, 'year'));
+        this.props.onChange(add(this.props.innerValue, -1, 'year'));
     }
 
     nextNav() {
         this.props.onChange(add(this.props.innerValue, 1, 'year'));
     }
 
-    handleLabelClick(){
-        this.props.onChangeView('year');
+    onChangeView() {
+        this.props.onChangeView(this.getPrevView(this.props.view));
     }
 
     onChange(date) {
         this.props.onChange(date, this.props.view);
+        if (this.compareView(this.props.view, this.props.mode) > 0) {
+            this.onChangeView();
+            this.props.onChangeView(this.getNextView(this.props.view));
+        }
     }
 
     getMonths() {
@@ -33,11 +40,12 @@ export default class MonthPicker extends React.Component {
         let view = this.props.view;
         let year = innerValue.getFullYear();
 
-        let months = this.props.locale['months'].map((monthStr, month) =>{
+        let months = this.props.locale['months'].map((monthStr, month) => {
             let date = new Date(year, month);
             return {
                 value: date,
                 selected: compareDate(date, value, view),
+                current: true,
                 disabled: false
             }
         });
@@ -51,7 +59,7 @@ export default class MonthPicker extends React.Component {
     }
 
 
-    renderHead(){
+    renderHead() {
         return (
             <div className="rcdate-head">
                 <div className="rcdate-display">
@@ -59,7 +67,7 @@ export default class MonthPicker extends React.Component {
                          onClick={this.prevNav.bind(this)}>
                         &lt; </div>
                     <div className="rcdate-label"
-                         onClick={this.handleLabelClick.bind(this)}>
+                         onClick={this.onChangeView.bind(this)}>
                         {format(this.props.innerValue, 'yyyy')} </div>
                     <div className="rcdate-btn btn-right"
                          onClick={this.nextNav.bind(this)}>
@@ -69,7 +77,7 @@ export default class MonthPicker extends React.Component {
         )
     }
 
-    renderBody(){
+    renderBody() {
         return (
             <div className="rcdate-body">
                 {this.getMonths().map((items, idx) =>
@@ -105,10 +113,13 @@ MonthPicker.propTypes = {
     onChangeView: PropTypes.func,
     prevDate: PropTypes.func,
     nextDate: PropTypes.func,
-    value: PropTypes.any, // todo
-    innerValue: PropTypes.any, // todo
+    value: PropTypes.any,
+    innerValue: PropTypes.instanceOf(Date),
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     view: PropTypes.string,
-    locale: PropTypes.any // todo
+    mode: PropTypes.string,
+    locale: PropTypes.object
 };
+
+export default PickerWrapper(MonthPicker)

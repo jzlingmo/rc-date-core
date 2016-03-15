@@ -66,6 +66,7 @@ export default class DatePicker extends React.Component {
             value={this.state.value}
             innerValue={this.state.innerValue}
             view={this.state.view}
+            mode={this.props.mode}
             minDate={this.props.minDate}
             maxDate={this.props.maxDate}
             onChange={this.onChange.bind(this)}
@@ -79,6 +80,7 @@ export default class DatePicker extends React.Component {
             value={this.state.value}
             innerValue={this.state.innerValue}
             view={this.state.view}
+            mode={this.props.mode}
             minDate={this.props.minDate}
             maxDate={this.props.maxDate}
             onChange={this.onChange.bind(this)}
@@ -92,6 +94,7 @@ export default class DatePicker extends React.Component {
             value={this.state.value}
             innerValue={this.state.innerValue}
             view={this.state.view}
+            mode={this.props.mode}
             minDate={this.props.minDate}
             maxDate={this.props.maxDate}
             onChange={this.onChange.bind(this)}
