@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames';
 
-export default class Picker extends React.Component {
+export default class PickerItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -46,9 +46,9 @@ export default class Picker extends React.Component {
     }
 }
 
-Picker.defaultProps = {};
+PickerItem.defaultProps = {};
 
-Picker.propTypes = {
+PickerItem.propTypes = {
     onClick: PropTypes.func,
     date: PropTypes.func,
     view: PropTypes.string,

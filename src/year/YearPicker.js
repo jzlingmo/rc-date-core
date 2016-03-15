@@ -1,20 +1,18 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames';
 
-import Picker from '../common/Picker'
+import PickerHead from '../common/PickerHead'
+import PickerItem from '../common/PickerItem'
 import PickerWrapper from '../common/PickerWrapper'
 import {compareDate, format, add} from '../utils/date'
-import {range} from '../utils/util'
+import {range, matrix} from '../utils/util'
 
-const RowDay = 3;
-const ColDay = 4;
+const RowNum = 3;
+const ColNum = 4;
 
 class YearPicker extends React.Component {
     constructor(props) {
         super(props);
-        let innerValue = this.props.innerValue;
-        let year = innerValue.getFullYear();
-        this.baseYear = Math.floor(year / 10) * 10;
     }
 
     prevNav() {
@@ -23,17 +21,6 @@ class YearPicker extends React.Component {
 
     nextNav() {
         this.props.onChange(add(new Date(this.getBase(), 0), 10, 'year'));
-    }
-
-    onChangeView() {
-        this.props.onChangeView(this.getPrevView(this.props.view));
-    }
-
-    onChange(date) {
-        this.props.onChange(date, this.props.view);
-        if (this.compareView(this.props.view, this.props.mode) > 0) {
-            this.props.onChangeView(this.getNextView(this.props.view));
-        }
     }
 
     getBase() {
@@ -65,31 +52,7 @@ class YearPicker extends React.Component {
             disabled: false
         });
 
-        let arr = [];
-        let len = years.length;
-        for (let start = 0; start < len; start += ColDay) {
-            arr.push(years.slice(start, start + ColDay))
-        }
-        return arr
-    }
-
-
-    renderHead() {
-        let baseYear = this.getBase();
-        return (
-            <div className="rcdate-head">
-                <div className="rcdate-display">
-                    <div className="rcdate-btn btn-left"
-                         onClick={this.prevNav.bind(this)}>
-                        &lt; </div>
-                    <div className="rcdate-label">
-                        {[baseYear, baseYear + 9].join(' - ')} </div>
-                    <div className="rcdate-btn btn-right"
-                         onClick={this.nextNav.bind(this)}>
-                        &gt; </div>
-                </div>
-            </div>
-        )
+        return matrix(years, ColNum)
     }
 
     renderBody() {
@@ -98,7 +61,7 @@ class YearPicker extends React.Component {
                 {this.getYears().map((items, idx) =>
                     <div key={idx} className="rcdate-row">
                         {items.map((item, idx) =>
-                            <Picker {...item}
+                            <PickerItem {...item}
                                 key={idx}
                                 view={this.props.view}
                                 onClick={this.onChange.bind(this)}
@@ -112,29 +75,19 @@ class YearPicker extends React.Component {
     }
 
     render() {
+        let baseYear = this.getBase();
         return (
             <div className="rcdate-container">
-                {this.renderHead()}
+                <PickerHead
+                    onPrev={this.prevNav.bind(this)}
+                    onNext={this.nextNav.bind(this)}
+                    onLabelClick={this.onForwardView.bind(this, -1)}
+                    label={[baseYear, baseYear + 9].join(' - ')}
+                />
                 {this.renderBody()}
             </div>
         )
     }
 }
-
-YearPicker.defaultProps = {};
-
-YearPicker.propTypes = {
-    onChange: PropTypes.func,
-    onChangeView: PropTypes.func,
-    prevDate: PropTypes.func,
-    nextDate: PropTypes.func,
-    value: PropTypes.any,
-    innerValue: PropTypes.instanceOf(Date),
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
-    view: PropTypes.string,
-    mode: PropTypes.string,
-    locale: PropTypes.object
-};
 
 export default PickerWrapper(YearPicker)
