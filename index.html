@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Rc-date-core by jzlingmo</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Rc-date-core</h1>
+        <h2>A compact and delicate crafted core of date input.</h2>
+        <a href="https://github.com/jzlingmo/rc-date-core" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="rc-date-core" class="anchor" href="#rc-date-core" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rc-date-core</h1>
+
+<p>A compact and delicate crafted core of date input.</p>
+
+<p><img src="http://7xib2u.com1.z0.glb.clouddn.com/daypicker.png" width="236"></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-source-shell"><pre>npm install rc-date-core --save</pre></div>
+
+<h2>
+<a id="props" class="anchor" href="#props" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Props</h2>
+
+<ul>
+<li>
+<strong>onChange</strong> (func) return string value formatted by prop 'mode' and 'returnFormat'</li>
+<li>
+<strong>value</strong> (string) initial date value e.g. 'yyyy/MM/dd'</li>
+<li>
+<strong>min</strong> (string) min date limit depended on mode e.g. '2015/01/01'</li>
+<li>
+<strong>max</strong> (string) max date limit same as above</li>
+<li>
+<strong>mode</strong> (string default 'day')  'year' 'month' 'day' as 'year' just a year picker</li>
+<li>
+<strong>returnFormat</strong> (string) e.g. 'yyyy/MM/dd' </li>
+<li>
+<strong>className</strong> (string)</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">DatePicker</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>rc-date-core<span class="pl-pds">'</span></span>
+<span class="pl-c">// use dark skin</span>
+<span class="pl-k">import</span> <span class="pl-smi">style</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>./node_modules/rc-date-core/dist/dark.css<span class="pl-pds">'</span></span>
+<span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span>{
+    <span class="pl-en">constructor</span>(){
+        <span class="pl-v">this</span>.<span class="pl-smi">state</span> <span class="pl-k">=</span> {
+            value<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>2016/03/01<span class="pl-pds">'</span></span>
+        }
+    }
+    <span class="pl-en">render</span>(){
+        <span class="pl-k">return</span> (
+            <span class="pl-k">&lt;</span>DatePicker ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>datepicker<span class="pl-pds">"</span></span>
+                   mode<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>day<span class="pl-pds">"</span></span>
+                   min<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>2016/01/01<span class="pl-pds">"</span></span>
+                   max<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>2016/11/01<span class="pl-pds">"</span></span>
+                   value<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">state</span>.<span class="pl-c1">value</span>}
+                   onChange<span class="pl-k">=</span>{(<span class="pl-smi">v</span>)<span class="pl-k">=&gt;</span>{<span class="pl-v">this</span>.<span class="pl-en">setState</span>({value<span class="pl-k">:</span> v})}}
+           <span class="pl-k">/</span><span class="pl-k">&gt;</span>
+       )
+    }
+}</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/jzlingmo/rc-date-core/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/jzlingmo/rc-date-core/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/jzlingmo/rc-date-core"></a> is maintained by <a href="https://github.com/jzlingmo">jzlingmo</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
