@@ -40,9 +40,9 @@ gulp.task('watch', ['css', 'browser-sync-server'], function () {
     gulp.watch([stylePath], ['css']);
 });
 
-gulp.task('build', ['css', 'webpack:build']);
+gulp.task('build-demo', ['css', 'webpack:build-demo']);
 
-gulp.task('webpack:build', (callback) => {
+gulp.task('webpack:build-demo', (callback) => {
     var myConfig = Object.create(webpackConfig);
     myConfig.devtool = null;
     myConfig.entry = './index';
