@@ -1,9 +1,10 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
-const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const gutil = require('gulp-util');
 
 const browserSync = require('browser-sync');
-const webpack = require("webpack");
+const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
@@ -13,8 +14,8 @@ const bundler = webpack(webpackConfig);
 const stylePath = 'themes/**/*.{css,sass}';
 gulp.task('css', () => {
     gulp.src(stylePath)
-        .pipe(sass())
-        .pipe(gulp.dest("dist/"));
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('browser-sync-server', () => {
@@ -31,10 +32,30 @@ gulp.task('browser-sync-server', () => {
                 webpackHotMiddleware(bundler)
             ]
         },
-        open: "external"
+        open: 'external'
     });
 });
 
 gulp.task('watch', ['css', 'browser-sync-server'], function () {
     gulp.watch([stylePath], ['css']);
+});
+
+gulp.task('build', ['css', 'webpack:build']);
+
+gulp.task('webpack:build', (callback) => {
+    var myConfig = Object.create(webpackConfig);
+    myConfig.plugins = myConfig.plugins.concat(
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin()
+    );
+
+    // run webpack
+    webpack(myConfig, (err, stats) => {
+        if(err) throw new gutil.PluginError('webpack:build', err);
+        callback();
+    });
 });
