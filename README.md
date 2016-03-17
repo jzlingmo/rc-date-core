@@ -1,6 +1,8 @@
 # rc-date-core
 A compact and delicate crafted core of date input.
 
+<img src="http://7xib2u.com1.z0.glb.clouddn.com/daypicker.png" width="236"/>
+
 ## Installation
 ``` shell
 npm install rc-date-core --save
