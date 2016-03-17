@@ -7,7 +7,8 @@
   -ms-user-select: none
   user-select: none
   display: inline-block
-  font-size: 14px
+  font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif
+  font-size: $baseSize
   color: $baseColor
   .rcdate-container
     width: $containerWidth
@@ -47,7 +48,7 @@
         text-align: center
         cursor: pointer
         &:hover
-          background-color: #333
+          background-color: $pickerHover
 
         &.fixed:hover
           background-color: transparent
@@ -68,7 +69,10 @@
 
   .rcdate-body
     padding: $padding
-    font-size: 12px
+    font-size: $bodySize
+    background: $bodyBg
+    border-bottom-left-radius: $radius
+    border-bottom-right-radius: $radius
 
   .rcdate-row
     display: inline-block

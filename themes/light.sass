@@ -1,10 +1,10 @@
-/* vars for dark skin */
+/* vars for light skin */
 /* size */
 $radius: 4px
 $padding: 4px
 
 $baseSize: 14px
-$bodySize: 12px
+$bodySize: 14px
 
 $containerWidth: 220px
 
@@ -21,30 +21,33 @@ $yearHeight: $containerWidth / 4
 
 /* color */
 
-$baseColor: #cfcfcf
+$baseColor: #333
 
 // container
-$containerBg: #555
-$containerBorder: 1px solid #333
+$containerBg: #fff
+$containerBorder: 1px solid #ccc
 
 // head
-$headBg: #555
-$headBorder: 1px solid #444
+$headBg: #fff
+$headBorder: none
 
 // body
-$bodyBg: #555
+$bodyBg: #fff
 
 // picker
-$pickerColor: #aaa
-$pickerBg: #bbb
-$pickerHover: #333
-$pickerDisabled: #888
+$pickerColor: #ccc
+$pickerBg: transparent
+$pickerHover: #f0f0f0
+$pickerDisabled: #ccc
 $pickerDisabledHover: transparent
 
-$currentPickerColor: #dfdfdf
+$currentPickerColor: #333
 $currentPickerBg: #bbb
 
 $selectedPickerColor: #F7F7F7
 $selectedPickerBg: #3B83C0
 
-$selectedCurrentPickerColor: #F7F7F7
+$selectedCurrentPickerColor: #fff
+
+// skin depend on vars
+@import "skin"

@@ -1,4 +1,4 @@
-/* vars for dark skin */
+/* vars for light skin */
 /* size */
 /* color */
 .rcdate {
@@ -11,17 +11,17 @@
   display: inline-block;
   font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;
   font-size: 14px;
-  color: #cfcfcf; }
+  color: #333; }
   .rcdate .rcdate-container {
     width: 220px;
-    border: 1px solid #333;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #555; }
+    background-color: #fff; }
   .rcdate .rcdate-head {
-    background-color: #555;
+    background-color: #fff;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    border-bottom: 1px solid #444; }
+    border-bottom: none; }
     .rcdate .rcdate-head .weeks {
       height: 20px;
       line-height: 20px;
@@ -46,7 +46,7 @@
         text-align: center;
         cursor: pointer; }
         .rcdate .rcdate-head .rcdate-display .rcdate-label:hover {
-          background-color: #333; }
+          background-color: #f0f0f0; }
         .rcdate .rcdate-head .rcdate-display .rcdate-label.fixed:hover {
           background-color: transparent;
           cursor: default; }
@@ -63,8 +63,8 @@
           right: 4px; }
   .rcdate .rcdate-body {
     padding: 4px;
-    font-size: 12px;
-    background: #555;
+    font-size: 14px;
+    background: #fff;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px; }
   .rcdate .rcdate-row {
@@ -74,7 +74,7 @@
   .rcdate .rcdate-picker {
     display: block;
     float: left;
-    color: #aaa;
+    color: #ccc;
     text-align: center;
     border-radius: 4px;
     cursor: pointer; }
@@ -93,16 +93,16 @@
     height: 55px;
     line-height: 55px; }
   .rcdate .rcdate-picker:hover {
-    background-color: #333; }
+    background-color: #f0f0f0; }
   .rcdate .rcdate-picker.selected {
     color: #F7F7F7;
     background-color: #3B83C0; }
   .rcdate .rcdate-picker.current {
-    color: #dfdfdf; }
+    color: #333; }
   .rcdate .rcdate-picker.selected.current {
-    color: #F7F7F7; }
+    color: #fff; }
   .rcdate .rcdate-picker.disabled {
-    color: #888; }
+    color: #ccc; }
   .rcdate .rcdate-picker.disabled:hover {
     background-color: transparent;
     cursor: default; }
@@ -113,4 +113,4 @@
     border-radius: 4px;
     cursor: pointer; }
   .rcdate .rcdate-btn:hover {
-    background-color: #333; }
+    background-color: #f0f0f0; }
