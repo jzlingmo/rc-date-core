@@ -35,7 +35,6 @@ class MonthPicker extends React.Component {
                 value: date,
                 selected: compareDate(date, value, view) === 0,
                 current: true,
-                disabled: false
             }
         });
 

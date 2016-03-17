@@ -13,7 +13,7 @@ export default class DatePicker extends React.Component {
     constructor(props) {
         super(props);
         let value = getDate(props.value); // get initial value
-        let innerValue = value || new Date(); // initial view value
+        let innerValue = getDate(value) || new Date(); // initial view value
         let view = props.mode;  // inital view mode
         this.state = {
             value: value,

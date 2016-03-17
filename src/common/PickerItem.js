@@ -36,10 +36,11 @@ export default class PickerItem extends React.Component {
     }
     isDisabled(){
         let props = this.props;
+        let view = props.view
         let date = props.value;
         let min = props.min;
         let max = props.max;
-        return compareDate(date, min) === -1 || compareDate(date, max) === 1
+        return compareDate(date, min, view) === -1 || compareDate(date, max, view) === 1
     }
 
     render() {

@@ -38,18 +38,15 @@ class YearPicker extends React.Component {
                 value: date,
                 current: true,
                 selected: compareDate(date, value, view) === 0,
-                disabled: false
             }
         });
         years.unshift({
             value: new Date(baseYear - 1, 0),
             selected: false,
-            disabled: false
         });
         years.push({
             value: new Date(baseYear + 10, 0),
             selected: false,
-            disabled: false
         });
 
         return matrix(years, ColNum)
