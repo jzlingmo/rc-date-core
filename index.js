@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import ReactDom from 'react-dom'
+import ReactDOM from 'react-dom'
 import DatePicker from './src'
 import Styles from './dist/dark.css'
 
@@ -44,4 +44,4 @@ class Page extends React.Component {
     }
 }
 
-ReactDom.render(<Page />, document.getElementById('main'));
+ReactDOM.render(<Page />, document.getElementById('main'));
