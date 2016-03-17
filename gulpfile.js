@@ -44,14 +44,16 @@ gulp.task('build', ['css', 'webpack:build']);
 
 gulp.task('webpack:build', (callback) => {
     var myConfig = Object.create(webpackConfig);
-    myConfig.plugins = myConfig.plugins.concat(
+    myConfig.devtool = null;
+    myConfig.entry = './index';
+    myConfig.plugins = [
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
         }),
         new webpack.optimize.UglifyJsPlugin()
-    );
+    ];
 
     // run webpack
     webpack(myConfig, (err, stats) => {
