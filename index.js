@@ -14,7 +14,7 @@ class Page extends React.Component {
     }
     render(){
         return <div>
-            <div>Current selected date: {this.state.value1}</div>
+            <div className="title">Current selected date: {this.state.value1}</div>
             <DatePicker
                 mode="day"
                 min="2015-05-20"
@@ -23,7 +23,7 @@ class Page extends React.Component {
                 onChange={(v)=>{this.setState({value1: v})}}
             />
 
-            <div>Current selected date: {this.state.value2}</div>
+            <div className="title">Current selected date: {this.state.value2}</div>
             <DatePicker
                 mode="month"
                 min="2015-05"
@@ -32,7 +32,7 @@ class Page extends React.Component {
                 onChange={(v)=>{this.setState({value2: v})}}
             />
 
-            <div>Current selected date: {this.state.value3}</div>
+            <div className="title">Current selected date: {this.state.value3}</div>
             <DatePicker
                 mode="year"
                 min="2015"
