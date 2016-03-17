@@ -1,4 +1,3 @@
-@import "vars"
 
 .rcdate
   -webkit-touch-callout: none
@@ -11,7 +10,7 @@
   margin-left: 5px
   margin-top: 5px
   font-size: 14px
-  color: #cfcfcf
+  color: $baseColor
   .rcdate-container
     width: $containerWidth
     border: $containerBorder
@@ -19,10 +18,10 @@
     background-color: $containerBg
 
   .rcdate-head
-    background-color: #555
+    background-color: $headBg
     border-top-left-radius: $radius
     border-top-right-radius: $radius
-    border-bottom: 1px solid #444
+    border-bottom: $headBorder
 
     .weeks
       height: 20px
@@ -89,20 +88,20 @@
 
   .rcdate-picker.day
     width: ( 100% / 7 )
-    height: 24px
-    line-height: 24px
+    height: $dayHeight
+    line-height: $dayHeight
 
   .rcdate-picker.month
     width: 23%
     margin: 1%
-    height: 55px
-    line-height: 52px
+    height: $monthHeight
+    line-height: $monthHeight
 
   .rcdate-picker.year
     width: 23%
     margin: 1%
-    height: 55px
-    line-height: 52px
+    height: $yearHeight
+    line-height: $yearHeight
 
   .rcdate-picker:hover
     background-color: $pickerHover

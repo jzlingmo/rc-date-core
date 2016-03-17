@@ -1,3 +1,4 @@
+/* vars for dark skin */
 /* size */
 /* color */
 .rcdate {
@@ -84,12 +85,12 @@
     width: 23%;
     margin: 1%;
     height: 55px;
-    line-height: 52px; }
+    line-height: 55px; }
   .rcdate .rcdate-picker.year {
     width: 23%;
     margin: 1%;
     height: 55px;
-    line-height: 52px; }
+    line-height: 55px; }
   .rcdate .rcdate-picker:hover {
     background-color: #333; }
   .rcdate .rcdate-picker.selected {

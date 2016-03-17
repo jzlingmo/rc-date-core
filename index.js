@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import ReactDom from 'react-dom'
 import DatePicker from './src'
-import Styles from './dist/default.css'
+import Styles from './dist/dark.css'
 
 class Page extends React.Component {
     constructor(props) {
