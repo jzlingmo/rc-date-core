@@ -40,7 +40,7 @@
         line-height: 20px; }
       .rcdate .rcdate-head .rcdate-display .rcdate-label {
         display: inline-block;
-        width: 80px;
+        width: 90px;
         padding: 4px;
         text-align: center;
         cursor: pointer; }
@@ -51,8 +51,8 @@
           cursor: default; }
       .rcdate .rcdate-head .rcdate-display .rcdate-btn {
         position: absolute;
-        top: 5px;
-        width: 35px;
+        top: 4px;
+        width: 45px;
         padding: 4px;
         border-radius: 4px;
         text-align: center; }
