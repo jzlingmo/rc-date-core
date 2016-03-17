@@ -39,24 +39,23 @@ class DayPicker extends React.Component {
         let prevCount = new Date(year, month).getDay();
         let nextCount = RowNum * ColNum - currentDaysCount - prevCount;
         let days = range(prevDaysCount - prevCount, prevCount).map(day => {
+            let date = new Date(year, month - 1, day);
             return {
-                value: new Date(year, month - 1, day),
+                value: date,
                 selected: false,
-                disabled: false,
             }
         }).concat(range(1, currentDaysCount).map(day => {
             let date = new Date(year, month, day);
             return {
                 value: date,
-                selected: compareDate(date, value, view),
+                selected: compareDate(date, value, view) === 0,
                 current: true,
-                disabled: false,
             }
         })).concat(range(1, nextCount).map(day => {
+            let date = new Date(year, month + 1, day);
             return {
-                value: new Date(year, month + 1, day),
+                value: date,
                 selected: false,
-                disabled: false,
             }
         }));
 
@@ -81,6 +80,8 @@ class DayPicker extends React.Component {
                         {items.map((item, idx) =>
                             <PickerItem {...item}
                                 key={idx}
+                                min={this.props.min}
+                                max={this.props.max}
                                 view={this.props.view}
                                 onClick={this.onChange.bind(this)}
                                 locale={this.props.locale}

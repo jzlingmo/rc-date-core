@@ -1,15 +1,16 @@
 /* vars for dark skin */
 /* size */
 $radius: 4px
+$padding: 4px
+
+$containerWidth: 220px
 
 $navHeight: 28px
 $btnPadding: 4px
 
-$dayHeight: 24px
-$monthHeight: 55px
-$yearHeight: 55px
-
-$containerWidth: 220px
+$dayHeight: ($containerWidth - $padding  * 2) / 7 - 3px
+$monthHeight: $containerWidth / 4
+$yearHeight: $containerWidth / 4
 
 /* color */
 
@@ -30,7 +31,7 @@ $bodyBg: #555
 $pickerColor: #aaa
 $pickerBg: #bbb
 $pickerHover: #333
-$pickerDisabled: #bbb
+$pickerDisabled: #888
 $pickerDisabledHover: transparent
 
 $currentPickerColor: #dfdfdf

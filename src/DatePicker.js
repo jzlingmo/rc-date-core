@@ -67,8 +67,8 @@ export default class DatePicker extends React.Component {
             innerValue={this.state.innerValue}
             view={this.state.view}
             mode={this.props.mode}
-            minDate={this.props.minDate}
-            maxDate={this.props.maxDate}
+            min={this.props.min}
+            max={this.props.max}
             onChange={this.onChange.bind(this)}
             onChangeView={this.onChangeView.bind(this)}
             locale={this.state.locale}
@@ -81,8 +81,8 @@ export default class DatePicker extends React.Component {
             innerValue={this.state.innerValue}
             view={this.state.view}
             mode={this.props.mode}
-            minDate={this.props.minDate}
-            maxDate={this.props.maxDate}
+            min={this.props.min}
+            max={this.props.max}
             onChange={this.onChange.bind(this)}
             onChangeView={this.onChangeView.bind(this)}
             locale={this.state.locale}
@@ -95,8 +95,8 @@ export default class DatePicker extends React.Component {
             innerValue={this.state.innerValue}
             view={this.state.view}
             mode={this.props.mode}
-            minDate={this.props.minDate}
-            maxDate={this.props.maxDate}
+            min={this.props.min}
+            max={this.props.max}
             onChange={this.onChange.bind(this)}
             onChangeView={this.onChangeView.bind(this)}
             locale={this.state.locale}
@@ -138,8 +138,8 @@ DatePicker.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
     mode: PropTypes.string, // 'year' 'month' 'day' as 'year' just a year picker
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
+    min: PropTypes.string,
+    max: PropTypes.string,
     returnFormat: PropTypes.string,
     className: PropTypes.string,
 };

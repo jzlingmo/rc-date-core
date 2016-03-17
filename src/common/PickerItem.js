@@ -1,6 +1,11 @@
 import React, {PropTypes} from 'react'
 import cx from 'classnames';
 
+import {compareDate} from '../utils/date'
+
+const noop = ()=> {
+};
+
 export default class PickerItem extends React.Component {
 
     constructor(props) {
@@ -29,18 +34,26 @@ export default class PickerItem extends React.Component {
         }
         return display
     }
+    isDisabled(){
+        let props = this.props;
+        let date = props.value;
+        let min = props.min;
+        let max = props.max;
+        return compareDate(date, min) === -1 || compareDate(date, max) === 1
+    }
 
     render() {
         let props = this.props;
+        let disabled = this.isDisabled();
         let className = cx("rcdate-picker", {
             [this.props.view]: true,
-            "disabled": props.disabled,
+            "disabled": disabled,
             "selected": props.selected,
             "current": props.current
         });
         return (
             <span className={className}
-                  onClick={this.onClick.bind(this)}
+                  onClick={disabled ? noop : this.onClick.bind(this)}
             >{this.getDisplay()}</span>
         )
     }

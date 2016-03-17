@@ -17,6 +17,8 @@ class Page extends React.Component {
             <div>Current selected date: {this.state.value1}</div>
             <DatePicker
                 mode="day"
+                min="2016-03-10"
+                max="2016-03-20"
                 value={this.state.value1}
                 onChange={(v)=>{this.setState({value1: v})}}
             />
@@ -24,6 +26,8 @@ class Page extends React.Component {
             <div>Current selected date: {this.state.value2}</div>
             <DatePicker
                 mode="month"
+                min="2016-02"
+                max="2016-05"
                 value={this.state.value2}
                 onChange={(v)=>{this.setState({value2: v})}}
             />
@@ -31,6 +35,8 @@ class Page extends React.Component {
             <div>Current selected date: {this.state.value3}</div>
             <DatePicker
                 mode="year"
+                min="2010"
+                max="2016"
                 value={this.state.value3}
                 onChange={(v)=>{this.setState({value3: v})}}
             />

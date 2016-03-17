@@ -9,8 +9,6 @@
   -ms-user-select: none;
   user-select: none;
   display: inline-block;
-  margin-left: 5px;
-  margin-top: 5px;
   font-size: 14px;
   color: #cfcfcf; }
   .rcdate .rcdate-container {
@@ -36,7 +34,7 @@
     .rcdate .rcdate-head .rcdate-display {
       position: relative;
       height: 28px;
-      padding: 5px;
+      padding: 4px;
       text-align: center; }
       .rcdate .rcdate-head .rcdate-display, .rcdate .rcdate-head .rcdate-display .rcdate-label, .rcdate .rcdate-head .rcdate-display .rcdate-btn {
         line-height: 20px; }
@@ -59,12 +57,11 @@
         border-radius: 4px;
         text-align: center; }
         .rcdate .rcdate-head .rcdate-display .rcdate-btn.btn-left {
-          left: 5px; }
+          left: 4px; }
         .rcdate .rcdate-head .rcdate-display .rcdate-btn.btn-right {
-          right: 5px; }
+          right: 4px; }
   .rcdate .rcdate-body {
-    padding: 0.5em;
-    padding-bottom: 0.3em;
+    padding: 4px;
     font-size: 12px; }
   .rcdate .rcdate-row {
     display: inline-block;
@@ -79,8 +76,8 @@
     cursor: pointer; }
   .rcdate .rcdate-picker.day {
     width: 14.28571%;
-    height: 24px;
-    line-height: 24px; }
+    height: 27.28571px;
+    line-height: 27.28571px; }
   .rcdate .rcdate-picker.month {
     width: 23%;
     margin: 1%;
@@ -101,7 +98,7 @@
   .rcdate .rcdate-picker.selected.current {
     color: #F7F7F7; }
   .rcdate .rcdate-picker.disabled {
-    color: #bbb; }
+    color: #888; }
   .rcdate .rcdate-picker.disabled:hover {
     background-color: transparent;
     cursor: default; }

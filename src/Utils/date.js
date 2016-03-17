@@ -59,9 +59,18 @@ const formatMap = {
 };
 
 export function compareDate(dateA, dateB, toMode = 'day') {
+    if(!dateA || !dateB){
+        return -2
+    }
     let formatStr;
     formatStr = formatMap[toMode];
-    dateA = new Date(dateA);
-    dateB = new Date(dateB);
-    return format(dateA, formatStr) === format(dateB, formatStr);
+    dateA = format(new Date(dateA), formatStr);
+    dateB = format(new Date(dateB), formatStr);
+    if(dateA > dateB){
+        return 1
+    }else if(dateA === dateB){
+        return 0
+    }else{
+        return -1
+    }
 }

@@ -48,8 +48,8 @@ const PickerWrapper = (Component) => {
             nextDate: PropTypes.func,
             value: PropTypes.any,
             innerValue: PropTypes.instanceOf(Date),
-            minDate: PropTypes.string,
-            maxDate: PropTypes.string,
+            min: PropTypes.string,
+            max: PropTypes.string,
             view: PropTypes.string,
             mode: PropTypes.string,
             locale: PropTypes.object

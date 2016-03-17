@@ -7,8 +7,6 @@
   -ms-user-select: none
   user-select: none
   display: inline-block
-  margin-left: 5px
-  margin-top: 5px
   font-size: 14px
   color: $baseColor
   .rcdate-container
@@ -37,7 +35,7 @@
     .rcdate-display
       position: relative
       height: $navHeight
-      padding: 5px
+      padding: $padding
       text-align: center
       &,.rcdate-label,.rcdate-btn
         line-height: $navHeight - 2 * $btnPadding
@@ -63,14 +61,13 @@
         border-radius: $radius
         text-align: center
         &.btn-left
-          left: 5px
+          left: $padding
 
         &.btn-right
-          right: 5px
+          right: $padding
 
   .rcdate-body
-    padding: 0.5em
-    padding-bottom: 0.3em
+    padding: $padding
     font-size: 12px
 
   .rcdate-row
@@ -125,7 +122,7 @@
 
   .rcdate-btn
     display: block
-    padding: 4px
+    padding: $btnPadding
     text-align: center
     border-radius: $radius
     cursor: pointer

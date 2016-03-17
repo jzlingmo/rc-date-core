@@ -33,7 +33,7 @@ class MonthPicker extends React.Component {
             let date = new Date(year, month);
             return {
                 value: date,
-                selected: compareDate(date, value, view),
+                selected: compareDate(date, value, view) === 0,
                 current: true,
                 disabled: false
             }
@@ -50,6 +50,8 @@ class MonthPicker extends React.Component {
                         {items.map((item, idx) =>
                             <PickerItem {...item}
                                 key={idx}
+                                min={this.props.min}
+                                max={this.props.max}
                                 view={this.props.view}
                                 onClick={this.onChange.bind(this)}
                                 locale={this.props.locale}
