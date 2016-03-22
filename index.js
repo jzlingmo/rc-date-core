@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import DatePicker from './src'
-import Styles from './dist/dark.css'
+import {DatePicker, DatePickerInput} from './src'
+import Styles from './dist/darkInput.css'
 
 class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            value: '2016-03-14',
             value1: '2016-03-12',
             value2: '2016-03',
             value3: '2016',
@@ -14,6 +15,15 @@ class Page extends React.Component {
     }
     render(){
         return <div>
+            <div>
+                <DatePickerInput
+                    min="2015-05-20"
+                    max="2016-05-20"
+                    value={this.state.value}
+                    readOnly={true}
+                    onChange={(v)=>{this.setState({value: v})}}
+                />
+            </div>
             <div className="title">Current selected date: {this.state.value1}</div>
             <DatePicker
                 mode="day"

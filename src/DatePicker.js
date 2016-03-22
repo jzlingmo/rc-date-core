@@ -142,4 +142,5 @@ DatePicker.propTypes = {
     max: PropTypes.string,
     returnFormat: PropTypes.string,
     className: PropTypes.string,
+    closeOnClickOutside: PropTypes.bool
 };

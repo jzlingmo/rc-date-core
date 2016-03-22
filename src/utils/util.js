@@ -6,6 +6,16 @@ export function range(start, count) {
     return arr
 }
 
+export function omit(obj, keysObj) {
+    let result = {};
+    for(let i in obj){
+        if(obj.hasOwnProperty(i) && !(i in keysObj)){
+            result[i] = obj[i]
+        }
+    }
+    return result
+}
+
 export function matrix(arr, col) {
     let matrix = [];
     let len = arr.length;
@@ -13,4 +23,8 @@ export function matrix(arr, col) {
         matrix.push(arr.slice(start, start + col))
     }
     return matrix
+}
+
+export function noop(){
+
 }
