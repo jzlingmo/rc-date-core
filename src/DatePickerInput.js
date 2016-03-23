@@ -8,6 +8,7 @@ import {getDate, format} from './utils/date'
 import {omit, noop} from './utils/util'
 
 const propTypes = {
+    className: PropTypes.string,
     onChange: PropTypes.func,
     onShow: PropTypes.func,
     onHide: PropTypes.func,
@@ -16,10 +17,18 @@ const propTypes = {
     min: PropTypes.string,
     max: PropTypes.string,
     returnFormat: PropTypes.string,
-    className: PropTypes.string,
-    closeOnClickOutside: PropTypes.bool,
     displayFormat: PropTypes.string,
     closeOnSelect: PropTypes.bool,
+    closeOnClickOutside: PropTypes.bool,
+};
+
+const defaultProps = {
+    onChange: noop,
+    onShow: noop,
+    onHide: noop,
+    mode: 'day',
+    closeOnClickOutside: true,
+    closeOnSelect: true,
 };
 
 export default class DatePickerInput extends React.Component {
@@ -30,6 +39,7 @@ export default class DatePickerInput extends React.Component {
             show: false,
             value: props.value
         };
+        this._onClickOutSideEvent = this._onClickOutSide.bind(this);
     }
 
     onChange(value) { // formatted value
@@ -44,39 +54,71 @@ export default class DatePickerInput extends React.Component {
         this.props.onChange(value)
     }
 
-    onClick() {
-        this.show();
-    }
-
     hide() {
-        this.setState({show: false}, this.props.onHide);
+        if (this.state.show) {
+            this._offClickOutside();
+            this.setState({show: false}, this.props.onHide);
+        }
     }
 
     show() {
         if (!this.state.show) {
+            this._onClickOutside();
             this.setState({show: true}, this.props.onShow);
         }
     }
 
-    componentDidMount() {
-
+    _onClickOutside() {
+        if (window.attachEvent) {
+            window.attachEvent('onclick', this._onClickOutSideEvent);
+        } else if (window.addEventListener) {
+            window.addEventListener('click', this._onClickOutSideEvent, false);
+        }
     }
 
-    componentWillUnmount() {
+    _offClickOutside() {
+        if (window.detachEvent) {
+            window.detachEvent('onclick', this._onClickOutSideEvent);
+        } else if (window.removeEventListener) {
+            window.removeEventListener('click', this._onClickOutSideEvent, false);
+        }
+    }
 
+    _onClickOutSide(e) {
+        let target = e.target || e.srcElement;
+        if (!e.inside && this._isOutside(target)) {
+            this.hide();
+        }
+    }
+
+    _isOutside(elem) {
+        let t = this;
+        let outside = true;
+        while (elem) {
+            if (elem === t.$el) {
+                outside = false;
+                break;
+            }
+            elem = elem.parentNode;
+        }
+        return outside
+    }
+
+    componentDidMount() {
+        this.$el = React.findDOMNode(this.refs['rcdateinput']);
     }
 
     render() {
         let props = this.props;
         let inputProps = omit(props, propTypes);
         return (
-            <div className={cx('rcdateinput', this.props.className)}>
+            <div ref="rcdateinput" className={cx('rcdateinput', this.props.className)}>
                 <input type="text" {...inputProps}
                        value={this.state.value}
-                       onClick={this.onClick.bind(this)}
+                       onClick={this.show.bind(this)}
                 />
                 {this.state.show ?
-                    <DatePicker
+                    <DatePicker ref
                         value={props.value}
                         mode={props.mode}
                         min={props.min}
@@ -92,12 +134,6 @@ export default class DatePickerInput extends React.Component {
 }
 
 
-DatePickerInput.defaultProps = {
-    onChange: noop,
-    onShow: noop,
-    onHide: noop,
-    closeOnClickOutside: true,
-    closeOnSelect: true,
-};
+DatePickerInput.defaultProps = defaultProps;
 
 DatePickerInput.propTypes = propTypes;

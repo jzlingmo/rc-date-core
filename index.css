@@ -1,0 +1,41 @@
+.section{
+    display: block;
+    margin-bottom: 10px;
+}
+.section .col{
+    float: left;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+.section .col1{
+    width: 248px;
+}
+.section .col2{}
+
+.section:before,
+.section:after {
+    content: " ";
+    display: table;
+}
+
+.section:after {
+    clear: both;
+}
+
+.section {
+    *zoom: 1;
+}
+
+.section-title{
+    font-size: 20px;
+    font-style: italic;
+    padding: 6px 0;
+}
+.section .value{
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: #f0f0f0;
+}

@@ -105,6 +105,7 @@ export default class DatePicker extends React.Component {
 
     render() {
         let t = this;
+        let props = t.props;
         let picker;
         switch (t.state.view) {
             case 'year':
@@ -113,18 +114,15 @@ export default class DatePicker extends React.Component {
             case 'month':
                 picker = t.renderMonthPicker();
                 break;
-            case 'day':
-            // fall through
+            case 'day': // fall through
             default:
                 picker = t.renderDayPicker();
                 break;
         }
         return (
-            <div
-                className={cx('rcdate', this.props.className, {floating: this.props.floating} )}
-                onClick={this.stopPropagation.bind(this)}>
-                {picker}
-            </div>
+            <div className={cx('rcdate', props.className, {floating: props.floating} )}
+                 onClick={t.stopPropagation.bind(t)}
+            >{picker}</div>
         )
     }
 }
@@ -135,12 +133,12 @@ DatePicker.defaultProps = {
 };
 
 DatePicker.propTypes = {
+    className: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
     mode: PropTypes.string, // 'year' 'month' 'day' as 'year' just a year picker
     min: PropTypes.string,
     max: PropTypes.string,
     returnFormat: PropTypes.string,
-    className: PropTypes.string,
     closeOnClickOutside: PropTypes.bool
 };
