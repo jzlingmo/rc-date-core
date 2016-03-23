@@ -56,14 +56,14 @@ export default class DatePickerInput extends React.Component {
 
     hide() {
         if (this.state.show) {
-            this._offClickOutside();
+            this.props.closeOnClickOutside && this._offClickOutside();
             this.setState({show: false}, this.props.onHide);
         }
     }
 
     show() {
         if (!this.state.show) {
-            this._onClickOutside();
+            this.props.closeOnClickOutside && this._onClickOutside();
             this.setState({show: true}, this.props.onShow);
         }
     }
@@ -86,7 +86,7 @@ export default class DatePickerInput extends React.Component {
 
     _onClickOutSide(e) {
         let target = e.target || e.srcElement;
-        if (!e.inside && this._isOutside(target)) {
+        if (this._isOutside(target)) {
             this.hide();
         }
     }
