@@ -1,7 +1,7 @@
 {
   "name": "rc-date-core",
-  "version": "1.0.0",
-  "description": "A compact and delicate crafted core of date input.",
+  "version": "1.1.0",
+  "description": "A compact and delicate crafted date picker.",
   "main": "src/index.js",
   "scripts": {
     "start": "gulp watch",
