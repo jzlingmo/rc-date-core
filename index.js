@@ -36,12 +36,12 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value}</span></p>
                     <p>Props</p>
                     <pre>
-                        autoPosition=true<br/>
-                        preferPosition="bottomRight"<br/>
-                        closeOnSelect=true<br/>
-                        closeOnClickOutside=true<br/>
-                        displayFormat="yyyy-M-d"<br/>
-                        returnFormat="yyyy/MM/dd"
+                        autoPosition= <span className="pl-k">true</span><br/>
+                        preferPosition= <span className="pl-s"><span className="pl-pds">"</span>bottomRight<span className="pl-pds">"</span></span><br/>
+                        closeOnSelect= <span className="pl-k">true</span><br/>
+                        closeOnClickOutside= <span className="pl-k">true</span><br/>
+                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-M-d<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy/MM/dd<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
@@ -62,10 +62,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value1}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="day"<br/>
-                        min="2015-05-20"<br/>
-                        max="2016-05-20"<br/>
-                        returnFormat="yyyy-MM-dd"<br/>
+                        mode= <span className="pl-s"><span className="pl-pds">"</span>day<span className="pl-pds">"</span></span><br/>
+                        min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2016-05-20<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
@@ -86,10 +86,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value2}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="month"<br/>
-                        min="2015-05"<br/>
-                        max="2016-05"<br/>
-                        returnFormat="yyyy-MM"<br/>
+                        mode= <span className="pl-s"><span className="pl-pds">"</span>month<span className="pl-pds">"</span></span><br/>
+                        min= <span className="pl-s"><span className="pl-pds">"</span>2015-05<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2016-05<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
@@ -110,10 +110,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value3}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="year"<br/>
-                        min="2015"<br/>
-                        max="2016"<br/>
-                        returnFormat="yyyy"<br/>
+                        mode= <span className="pl-s"><span className="pl-pds">"</span>year<span className="pl-pds">"</span></span><br/>
+                        min= <span className="pl-s"><span className="pl-pds">"</span>2015<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2016<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
