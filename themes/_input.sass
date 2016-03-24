@@ -1,8 +1,9 @@
 .rcdateinput
   position: relative
   overflow: visible
-  width: 100%
-  >input
+  input
+    width: 100%
+    box-sizing: border-box
     outline: none
     height: 28px
     line-height: 28px
@@ -13,6 +14,17 @@
     background: $containerBg
   .rcdate
     position: absolute
-    left: 0
-    top: 102%
     z-index: 2
+    &.topLeft,
+    &.topRight
+      bottom: 102%
+    &.bottomLeft,
+    &.bottomRight
+      top: 102%
+    &.topLeft,
+    &.bottomLeft
+      left: 0
+    &.topRight,
+    &.bottomRight
+      right: 0
+

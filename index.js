@@ -23,6 +23,8 @@ class Page extends React.Component {
                     <DatePickerInput
                         value={this.state.value}
                         readOnly={true}
+                        autoPosition={true}
+                        preferPosition="bottomRight"
                         closeOnSelect={true}
                         closeOnClickOutside={true}
                         onChange={(v)=>{this.setState({value: v})}}
@@ -32,6 +34,8 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value}</span></p>
                     <p>Props</p>
                     <pre>
+                        autoPosition=true<br/>
+                        preferPosition="bottomRight"<br/>
                         closeOnSelect=true<br/>
                         closeOnClickOutside=true<br/>
                     </pre>

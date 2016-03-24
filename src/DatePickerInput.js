@@ -6,6 +6,7 @@ import locale from './locale/zh-cn'
 
 import {getDate, format} from './utils/date'
 import {omit, noop} from './utils/util'
+import {getViewPortSize} from './utils/dom'
 
 const propTypes = {
     className: PropTypes.string,
@@ -18,6 +19,8 @@ const propTypes = {
     max: PropTypes.string,
     returnFormat: PropTypes.string,
     displayFormat: PropTypes.string,
+    autoPosition: PropTypes.bool,
+    preferPosition: PropTypes.string, // 'topLeft' 'topRight' 'bottomLeft' 'bottomRight'
     closeOnSelect: PropTypes.bool,
     closeOnClickOutside: PropTypes.bool,
 };
@@ -27,8 +30,27 @@ const defaultProps = {
     onShow: noop,
     onHide: noop,
     mode: 'day',
+    autoPosition: false,
+    preferPosition: 'bottomLeft',
     closeOnClickOutside: true,
     closeOnSelect: true,
+};
+
+
+const eventOn = (target, type, fn) => {
+    if (window.attachEvent) {
+        target.attachEvent('on' + type, fn);
+    } else if (window.addEventListener) {
+        target.addEventListener(type, fn, false);
+    }
+};
+
+const eventOff = (target, type, fn) => {
+    if (window.detachEvent) {
+        target.detachEvent('on' + type, fn);
+    } else if (window.removeEventListener) {
+        target.removeEventListener(type, fn, false);
+    }
 };
 
 export default class DatePickerInput extends React.Component {
@@ -37,9 +59,12 @@ export default class DatePickerInput extends React.Component {
         super(props);
         this.state = {
             show: false,
-            value: props.value
+            value: props.value,
+            pickerClass: props.preferPosition,
         };
         this._onClickOutSideEvent = this._onClickOutSide.bind(this);
+        this._onAutoPositionEvent = this._onAutoPosition.bind(this);
+        this._preferTop = props.preferPosition.indexOf('top') !== -1;
     }
 
     onChange(value) { // formatted value
@@ -56,46 +81,30 @@ export default class DatePickerInput extends React.Component {
 
     hide() {
         if (this.state.show) {
-            this.props.closeOnClickOutside && this._offClickOutside();
+            this.props.closeOnClickOutside && eventOff(window, 'click', this._onClickOutSideEvent);
             this.setState({show: false}, this.props.onHide);
         }
     }
 
     show() {
         if (!this.state.show) {
-            this.props.closeOnClickOutside && this._onClickOutside();
+            this.props.closeOnClickOutside && eventOn(window, 'click', this._onClickOutSideEvent);
             this.setState({show: true}, this.props.onShow);
-        }
-    }
-
-    _onClickOutside() {
-        if (window.attachEvent) {
-            window.attachEvent('onclick', this._onClickOutSideEvent);
-        } else if (window.addEventListener) {
-            window.addEventListener('click', this._onClickOutSideEvent, false);
-        }
-    }
-
-    _offClickOutside() {
-        if (window.detachEvent) {
-            window.detachEvent('onclick', this._onClickOutSideEvent);
-        } else if (window.removeEventListener) {
-            window.removeEventListener('click', this._onClickOutSideEvent, false);
         }
     }
 
     _onClickOutSide(e) {
         let target = e.target || e.srcElement;
-        if (this._isOutside(target)) {
+        if (this.__isOutside(target)) {
             this.hide();
         }
     }
 
-    _isOutside(elem) {
+    __isOutside(elem) {
         let t = this;
         let outside = true;
         while (elem) {
-            if (elem === t.$el) {
+            if (elem === t.$input) {
                 outside = false;
                 break;
             }
@@ -104,8 +113,47 @@ export default class DatePickerInput extends React.Component {
         return outside
     }
 
+    _onAutoPosition() {
+        this.state.show && this.setState({
+            pickerClass: this._getPickerClass()
+        })
+    }
+
+    _getPickerClass() {
+        let pickerClass = this.state.pickerClass;
+
+        let $picker = React.findDOMNode(this.refs['rcdatepicker']);
+        let pickerHeight = $picker ? $picker.clientHeight : 300; // use 300px as default
+
+        let rect = this.$input.getBoundingClientRect();
+        let toTop = this._preferTop;
+        if(this._preferTop){
+            toTop = rect['top'] >= pickerHeight;
+        }else{
+            // toTop only when bottom area too small
+            toTop = getViewPortSize()['h'] - rect['bottom'] < pickerHeight;
+        }
+
+        pickerClass = pickerClass.replace(/top|bottom/, toTop ? 'top' : 'bottom');
+        return pickerClass
+    }
+
     componentDidMount() {
-        this.$el = React.findDOMNode(this.refs['rcdateinput']);
+        this.$input = React.findDOMNode(this.refs['rcdateinput']);
+        if (this.props.autoPosition) {
+            eventOn(window, 'scroll', this._onAutoPositionEvent);
+            eventOn(window, 'resize', this._onAutoPositionEvent);
+            this.setState({
+                pickerClass: this._getPickerClass()
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.props.autoPosition) {
+            eventOff(window, 'scroll', this._onAutoPositionEvent);
+            eventOff(window, 'resize', this._onAutoPositionEvent);
+        }
     }
 
     render() {
@@ -118,14 +166,14 @@ export default class DatePickerInput extends React.Component {
                        onClick={this.show.bind(this)}
                 />
                 {this.state.show ?
-                    <DatePicker ref
-                        value={props.value}
-                        mode={props.mode}
-                        min={props.min}
-                        max={props.max}
-                        returnFormat={props.returnFormat}
-                        closeOnClickOutside={props.closeOnClickOutside}
-                        onChange={this.onChange.bind(this)}
+                    <DatePicker ref="rcdatepicker" className={this.state.pickerClass}
+                                value={props.value}
+                                mode={props.mode}
+                                min={props.min}
+                                max={props.max}
+                                returnFormat={props.returnFormat}
+                                closeOnClickOutside={props.closeOnClickOutside}
+                                onChange={this.onChange.bind(this)}
                     />
                     : ''}
             </div>
