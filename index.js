@@ -27,6 +27,8 @@ class Page extends React.Component {
                         preferPosition="bottomRight"
                         closeOnSelect={true}
                         closeOnClickOutside={true}
+                        displayFormat="yyyy年M月d日"
+                        returnFormat="yyyy-MM-dd"
                         onChange={(v)=>{this.setState({value: v})}}
                     />
                 </div>
@@ -38,6 +40,8 @@ class Page extends React.Component {
                         preferPosition="bottomRight"<br/>
                         closeOnSelect=true<br/>
                         closeOnClickOutside=true<br/>
+                        displayFormat="yyyy-M-d"<br/>
+                        returnFormat="yyyy/MM/dd"
                     </pre>
                 </div>
             </div>
@@ -50,6 +54,7 @@ class Page extends React.Component {
                         min="2015-05-20"
                         max="2016-05-20"
                         value={this.state.value1}
+                        returnFormat="yyyy-MM-dd"
                         onChange={(v)=>{this.setState({value1: v})}}
                     />
                 </div>
@@ -57,9 +62,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value1}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="day" <br/>
+                        mode="day"<br/>
                         min="2015-05-20"<br/>
-                        max="2016-05-20"
+                        max="2016-05-20"<br/>
+                        returnFormat="yyyy-MM-dd"<br/>
                     </pre>
                 </div>
             </div>
@@ -71,6 +77,7 @@ class Page extends React.Component {
                         mode="month"
                         min="2015-05"
                         max="2016-05"
+                        returnFormat="yyyy-MM"
                         value={this.state.value2}
                         onChange={(v)=>{this.setState({value2: v})}}
                     />
@@ -79,9 +86,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value2}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="month" <br/>
+                        mode="month"<br/>
                         min="2015-05"<br/>
-                        max="2016-05"
+                        max="2016-05"<br/>
+                        returnFormat="yyyy-MM"<br/>
                     </pre>
                 </div>
             </div>
@@ -93,6 +101,7 @@ class Page extends React.Component {
                         mode="year"
                         min="2015"
                         max="2016"
+                        returnFormat="yyyy"
                         value={this.state.value3}
                         onChange={(v)=>{this.setState({value3: v})}}
                     />
@@ -101,9 +110,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.value3}</span></p>
                     <p>Props</p>
                     <pre>
-                        mode="year" <br/>
+                        mode="year"<br/>
                         min="2015"<br/>
-                        max="2016"
+                        max="2016"<br/>
+                        returnFormat="yyyy"<br/>
                     </pre>
                 </div>
             </div>

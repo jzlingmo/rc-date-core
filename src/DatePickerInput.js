@@ -4,7 +4,7 @@ import cx from 'classnames';
 import DatePicker from './DatePicker'
 import locale from './locale/zh-cn'
 
-import {getDate, format} from './utils/date'
+import {getDate, format, getModeFormat} from './utils/date'
 import {omit, noop} from './utils/util'
 import {getViewPortSize} from './utils/dom'
 
@@ -59,7 +59,7 @@ export default class DatePickerInput extends React.Component {
         super(props);
         this.state = {
             show: false,
-            value: props.value,
+            value: this.getDisplayValue(props.value),
             pickerClass: props.preferPosition,
         };
         this._onClickOutSideEvent = this._onClickOutSide.bind(this);
@@ -67,16 +67,24 @@ export default class DatePickerInput extends React.Component {
         this._preferTop = props.preferPosition.indexOf('top') !== -1;
     }
 
-    onChange(value) { // formatted value
+    getDisplayValue(value) {
+        return format(value, this.props.displayFormat || getModeFormat(this.props.mode))
+    }
+
+    getReturnValue(value) {
+        return format(value, this.props.returnFormat || getModeFormat(this.props.mode))
+    }
+
+    onChange(value) { // formatted date string
         this.setState({
-            value: value
+            value: this.getDisplayValue(value)
         });
         if (this.props.closeOnSelect) {
             this.setState({
                 show: false
             });
         }
-        this.props.onChange(value)
+        this.props.onChange(this.getReturnValue(value))
     }
 
     hide() {
@@ -127,9 +135,9 @@ export default class DatePickerInput extends React.Component {
 
         let rect = this.$input.getBoundingClientRect();
         let toTop = this._preferTop;
-        if(this._preferTop){
+        if (this._preferTop) {
             toTop = rect['top'] >= pickerHeight;
-        }else{
+        } else {
             // toTop only when bottom area too small
             toTop = getViewPortSize()['h'] - rect['bottom'] < pickerHeight;
         }
@@ -171,7 +179,6 @@ export default class DatePickerInput extends React.Component {
                                 mode={props.mode}
                                 min={props.min}
                                 max={props.max}
-                                returnFormat={props.returnFormat}
                                 closeOnClickOutside={props.closeOnClickOutside}
                                 onChange={this.onChange.bind(this)}
                     />

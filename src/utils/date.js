@@ -3,8 +3,14 @@ export function daysInMonth(year, month) {
 }
 
 export function getDate(value) {
-    // todo should return valid date or just null
-    return new Date(value)
+    if(typeof value === 'string'){
+        value = value.replace(/-/g, '/')
+    }
+    let date = new Date(value);
+    if(isNaN(date.getTime())){
+        return null
+    }
+    return date
 }
 
 let methodMap = {
@@ -23,8 +29,11 @@ export function add(date, num, type) {
     return new Date(date)
 }
 
-export function format(date, formatStr = 'yyyy-MM-dd') {
-    date = new Date(date);
+export function format(date, formatStr = 'yyyy/MM/dd') {
+    date = getDate(date);
+    if(date == null){
+        return ''
+    }
     let map = {
         M: date.getMonth() + 1,
         d: date.getDate(),
@@ -47,6 +56,17 @@ export function format(date, formatStr = 'yyyy-MM-dd') {
         return all;
     });
     return formatStr.replace(/&/g, '');
+}
+
+export function getModeFormat(mode) {
+    const formatStr = 'yyyy/MM/dd hh:ss';
+    const lenMap = {
+        year: 4,
+        month: 7,
+        day: 10,
+        hour: 16
+    };
+    return formatStr.substr(0, lenMap[mode])
 }
 
 

@@ -6,14 +6,14 @@ import MonthPicker from './month/MonthPicker'
 import DayPicker from './day/DayPicker'
 import locale from './locale/zh-cn'
 
-import {getDate, format} from './utils/date'
+import {getDate, format, getModeFormat} from './utils/date'
 
 export default class DatePicker extends React.Component {
 
     constructor(props) {
         super(props);
         let value = getDate(props.value); // get initial value
-        let innerValue = getDate(value) || new Date(); // initial view value
+        let innerValue = value || new Date(); // initial view value
         let view = props.mode;  // inital view mode
         this.state = {
             value: value,
@@ -29,18 +29,8 @@ export default class DatePicker extends React.Component {
         }
     }
 
-    getReturnValue(value){
-        let returnFormat = this.props.returnFormat;
-        let mode = this.props.mode;
-        const formatStr = 'yyyy-MM-dd hh:ss';
-        const lenMap = {
-            year: 4,
-            month: 7,
-            day: 10,
-            hour: 16
-        };
-        returnFormat = returnFormat || formatStr.substr(0, lenMap[mode]);
-        return format(value, returnFormat)
+    getReturnValue(value) {
+        return format(value, this.props.returnFormat || getModeFormat(this.props.mode))
     }
 
     onChange(value, view) {
