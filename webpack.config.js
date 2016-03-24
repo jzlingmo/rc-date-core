@@ -33,7 +33,7 @@ module.exports = {
                     'react-hot',
                     // babel 6 need these queries
                     // https://medium.com/@malyw/how-to-update-babel-5-x-6-x-d828c230ec53#.jvxlzskds
-                    'babel?presets[]=react,presets[]=es2015,presets[]=stage-2'
+                    'babel'
                 ]
             },
             {

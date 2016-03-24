@@ -6,6 +6,8 @@
   "scripts": {
     "start": "gulp watch",
     "demo": "gulp build-demo",
+    "build": "rm -rf lib && mkdir lib && babel --loose --stage 2 --out-dir lib src",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

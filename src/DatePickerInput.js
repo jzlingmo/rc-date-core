@@ -87,14 +87,14 @@ export default class DatePickerInput extends React.Component {
         this.props.onChange(this.getReturnValue(value))
     }
 
-    hide() {
+    hidePicker() {
         if (this.state.show) {
             this.props.closeOnClickOutside && eventOff(window, 'click', this._onClickOutSideEvent);
             this.setState({show: false}, this.props.onHide);
         }
     }
 
-    show() {
+    showPicker() {
         if (!this.state.show) {
             this.props.closeOnClickOutside && eventOn(window, 'click', this._onClickOutSideEvent);
             this.setState({
@@ -104,10 +104,18 @@ export default class DatePickerInput extends React.Component {
         }
     }
 
+    togglePicker(){
+        if(this.state.show){
+            this.hidePicker();
+        }else{
+            this.showPicker();
+        }
+    }
+
     _onClickOutSide(e) {
         let target = e.target || e.srcElement;
         if (this.__isOutside(target)) {
-            this.hide();
+            this.hidePicker();
         }
     }
 
@@ -174,7 +182,7 @@ export default class DatePickerInput extends React.Component {
             <div ref="rcdateinput" className={cx('rcdateinput', this.props.className)}>
                 <input type="text" {...inputProps}
                        value={this.state.value}
-                       onClick={this.show.bind(this)}
+                       onClick={this.showPicker.bind(this)}
                 />
                 {this.state.show ?
                     <DatePicker ref="rcdatepicker" className={this.state.pickerClass}

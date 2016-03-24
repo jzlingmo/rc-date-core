@@ -3,6 +3,9 @@ export function daysInMonth(year, month) {
 }
 
 export function getDate(value) {
+    if(!value){
+        return null
+    }
     if(typeof value === 'string'){
         value = value.replace(/-/g, '/')
     }
