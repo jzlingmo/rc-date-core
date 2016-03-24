@@ -97,7 +97,10 @@ export default class DatePickerInput extends React.Component {
     show() {
         if (!this.state.show) {
             this.props.closeOnClickOutside && eventOn(window, 'click', this._onClickOutSideEvent);
-            this.setState({show: true}, this.props.onShow);
+            this.setState({
+                show: true,
+                pickerClass: this._getPickerClass()
+            }, this.props.onShow);
         }
     }
 
