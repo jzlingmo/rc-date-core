@@ -27,7 +27,7 @@ class Page extends React.Component {
                         readOnly={true}
                         autoPosition={true}
                         container='#scrollContainer'
-                        preferPo sition="topLeft"
+                        preferPosition="topLeft"
                         closeOnSelect={true}
                         closeOnClickOutside={true}
                         displayFormat="yyyy/MM/dd"
