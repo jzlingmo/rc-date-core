@@ -1,4 +1,6 @@
 import React, {PropTypes} from 'react'
+import ReactDOM from 'react-dom'
+
 import cx from 'classnames';
 
 import DatePicker from './DatePicker'
@@ -141,7 +143,7 @@ export default class DatePickerInput extends React.Component {
     _getPickerClass() {
         let pickerClass = this.state.pickerClass;
 
-        let $picker = React.findDOMNode(this.refs['rcdatepicker']);
+        let $picker = ReactDOM.findDOMNode(this.refs['rcdatepicker']);
         let pickerHeight = $picker ? $picker.clientHeight : 300; // use 300px as default
 
         let rect = this.$input.getBoundingClientRect();
@@ -158,7 +160,7 @@ export default class DatePickerInput extends React.Component {
     }
 
     componentDidMount() {
-        this.$input = React.findDOMNode(this.refs['rcdateinput']);
+        this.$input = ReactDOM.findDOMNode(this.refs['rcdateinput']);
         if (this.props.autoPosition) {
             eventOn(window, 'scroll', this._onAutoPositionEvent);
             eventOn(window, 'resize', this._onAutoPositionEvent);
