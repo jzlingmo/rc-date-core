@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
+
 import {DatePicker, DatePickerInput} from './src'
 import Styles from './dist/darkInput.css'
 import DemoStyles from './index.css'
@@ -17,7 +18,40 @@ class Page extends React.Component {
 
     render() {
         return <div className="demos">
-            <h3>Date input</h3>
+            <h3>Date input(auto position in scroll container)</h3>
+            <div id="scrollContainer" className="wrapper-limited">
+                <div className="section">
+                <div className="col col1">
+                    <DatePickerInput
+                        value={this.state.value}
+                        readOnly={true}
+                        autoPosition={true}
+                        container='#scrollContainer'
+                        preferPo sition="topLeft"
+                        closeOnSelect={true}
+                        closeOnClickOutside={true}
+                        displayFormat="yyyy/MM/dd"
+                        returnFormat="yyyy-MM-dd"
+                        onChange={(v)=>{this.setState({value: v})}}
+                    />
+                </div>
+                <div className="col col2">
+                    <p>Selected: <span className="value">{this.state.value}</span></p>
+                    <p>Props</p>
+                    <pre>
+                        autoPosition= <span className="pl-k">true</span><br/>
+                        container= <span className="pl-k">'#scrollContainer'</span><br/>
+                        preferPosition= <span className="pl-s"><span className="pl-pds">"</span>topLeft<span className="pl-pds">"</span></span><br/>
+                        closeOnSelect= <span className="pl-k">true</span><br/>
+                        closeOnClickOutside= <span className="pl-k">true</span><br/>
+                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy/MM/dd<span className="pl-pds">"</span></span><br/>
+                    </pre>
+                </div>
+            </div>
+            </div>
+
+            <h3>Date input(auto position)</h3>
             <div className="section">
                 <div className="col col1">
                     <DatePickerInput
@@ -40,8 +74,8 @@ class Page extends React.Component {
                         preferPosition= <span className="pl-s"><span className="pl-pds">"</span>bottomRight<span className="pl-pds">"</span></span><br/>
                         closeOnSelect= <span className="pl-k">true</span><br/>
                         closeOnClickOutside= <span className="pl-k">true</span><br/>
-                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-M-d<span className="pl-pds">"</span></span><br/>
-                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy/MM/dd<span className="pl-pds">"</span></span><br/>
+                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy年M月d日<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>

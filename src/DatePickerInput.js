@@ -8,7 +8,8 @@ import locale from './locale/zh-cn'
 
 import {getDate, format, getModeFormat} from './utils/date'
 import {omit, noop} from './utils/util'
-import {getViewPortSize} from './utils/dom'
+import {getViewPortSize, getBoundingClientRect} from './utils/dom'
+import {eventOn, eventOff} from './utils/event'
 
 const propTypes = {
     className: PropTypes.string,
@@ -22,6 +23,7 @@ const propTypes = {
     returnFormat: PropTypes.string,
     displayFormat: PropTypes.string,
     autoPosition: PropTypes.bool,
+    container: PropTypes.any, // string or dom object
     preferPosition: PropTypes.string, // 'topLeft' 'topRight' 'bottomLeft' 'bottomRight'
     closeOnSelect: PropTypes.bool,
     closeOnClickOutside: PropTypes.bool,
@@ -36,23 +38,6 @@ const defaultProps = {
     preferPosition: 'bottomLeft',
     closeOnClickOutside: true,
     closeOnSelect: true,
-};
-
-
-const eventOn = (target, type, fn) => {
-    if (window.attachEvent) {
-        target.attachEvent('on' + type, fn);
-    } else if (window.addEventListener) {
-        target.addEventListener(type, fn, false);
-    }
-};
-
-const eventOff = (target, type, fn) => {
-    if (window.detachEvent) {
-        target.detachEvent('on' + type, fn);
-    } else if (window.removeEventListener) {
-        target.removeEventListener(type, fn, false);
-    }
 };
 
 export default class DatePickerInput extends React.Component {
@@ -92,6 +77,7 @@ export default class DatePickerInput extends React.Component {
     hidePicker() {
         if (this.state.show) {
             this.props.closeOnClickOutside && eventOff(window, 'click', this._onClickOutSideEvent);
+            this.props.autoPosition && eventOff(this._getContainer(), 'scroll resize', this._onAutoPositionEvent);
             this.setState({show: false}, this.props.onHide);
         }
     }
@@ -99,17 +85,23 @@ export default class DatePickerInput extends React.Component {
     showPicker() {
         if (!this.state.show) {
             this.props.closeOnClickOutside && eventOn(window, 'click', this._onClickOutSideEvent);
+            this.props.autoPosition && eventOn(this._getContainer(), 'scroll resize', this._onAutoPositionEvent);
             this.setState({
                 show: true,
-                pickerClass: this._getPickerClass()
-            }, this.props.onShow);
+                pickerClass: this.state.pickerClass
+            }, ()=> {
+                this.props.onShow();
+                this.setState({
+                    pickerClass: this.props.autoPosition ? this._getPickerClass() : this.state.pickerClass
+                });
+            });
         }
     }
 
-    togglePicker(){
-        if(this.state.show){
+    togglePicker() {
+        if (this.state.show) {
             this.hidePicker();
-        }else{
+        } else {
             this.showPicker();
         }
     }
@@ -144,37 +136,40 @@ export default class DatePickerInput extends React.Component {
         let pickerClass = this.state.pickerClass;
 
         let $picker = ReactDOM.findDOMNode(this.refs['rcdatepicker']);
-        let pickerHeight = $picker ? $picker.clientHeight : 300; // use 300px as default
+        let $container = this.$container;
+        let pickerHeight = $picker ? $picker.clientHeight : 0;
 
-        let rect = this.$input.getBoundingClientRect();
+        let rect = getBoundingClientRect(this.$input, $container);
         let toTop = this._preferTop;
+        let topSpace = rect['top'];
+        let bottomSpace = getViewPortSize($container)['h'] - rect['bottom'];
+        let canTop = topSpace >= pickerHeight;
+        let canBottom = bottomSpace >= pickerHeight;
         if (this._preferTop) {
-            toTop = rect['top'] >= pickerHeight;
+            // to top when can top or neither can
+            toTop = canTop ? true : !canBottom;
         } else {
-            // toTop only when bottom area too small
-            toTop = getViewPortSize()['h'] - rect['bottom'] < pickerHeight;
+            // to bottom when can bottom or neither can
+            toTop = !(canBottom ? true : !canTop);
         }
-
         pickerClass = pickerClass.replace(/top|bottom/, toTop ? 'top' : 'bottom');
         return pickerClass
     }
 
+    _getContainer() {
+        let $container = this.props.container;
+        if (typeof $container === 'string') {
+            $container = document.querySelectorAll($container)[0];
+        }
+        this.$container = $container || window;
+        return this.$container
+    }
+
     componentDidMount() {
         this.$input = ReactDOM.findDOMNode(this.refs['rcdateinput']);
-        if (this.props.autoPosition) {
-            eventOn(window, 'scroll', this._onAutoPositionEvent);
-            eventOn(window, 'resize', this._onAutoPositionEvent);
-            this.setState({
-                pickerClass: this._getPickerClass()
-            });
-        }
     }
 
     componentWillUnmount() {
-        if (this.props.autoPosition) {
-            eventOff(window, 'scroll', this._onAutoPositionEvent);
-            eventOff(window, 'resize', this._onAutoPositionEvent);
-        }
     }
 
     render() {
