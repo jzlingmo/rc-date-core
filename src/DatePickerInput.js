@@ -54,6 +54,14 @@ export default class DatePickerInput extends React.Component {
         this._preferTop = props.preferPosition.indexOf('top') !== -1;
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.value !== this.props.value){
+            this.setState({
+                value: this.getDisplayValue(nextProps.value)
+            })
+        }
+    }
+
     getDisplayValue(value) {
         return format(value, this.props.displayFormat || getModeFormat(this.props.mode))
     }

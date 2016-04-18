@@ -23,6 +23,16 @@ export default class DatePicker extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.value !== this.props.value){
+            let value = getDate(nextProps.value);
+            this.setState({
+                value: value,
+                innerValue: value || new Date()
+            })
+        }
+    }
+
     stopPropagation(e) {
         if (this.props.closeOnClickOutside) {
             e.stopPropagation();

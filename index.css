@@ -51,3 +51,19 @@
     box-sizing: content-box;
     padding: 290px 10px 10px 10px;
 }
+
+.btn{
+    display: inline-block;
+    cursor: pointer;
+    color: #2e7bcf;
+    padding: 4px 8px;
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+}
+.btn:hover{
+    border: 1px solid #0095F5;
+}
+
+.btn-group .btn +.btn{
+    margin-left: 5px;
+}

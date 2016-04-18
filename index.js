@@ -9,10 +9,11 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            valueScroll: '2016-03-14',
             value: '2016-03-14',
-            value1: '2016-03-12',
-            value2: '2016-03',
-            value3: '2016',
+            valueDay: '2016-03-12',
+            valueMonth: '2016-03',
+            valueYear: '2016',
         };
     }
 
@@ -23,7 +24,7 @@ class Page extends React.Component {
                 <div className="section">
                 <div className="col col1">
                     <DatePickerInput
-                        value={this.state.value}
+                        value={this.state.valueScroll}
                         readOnly={true}
                         autoPosition={true}
                         container='#scrollContainer'
@@ -32,11 +33,19 @@ class Page extends React.Component {
                         closeOnClickOutside={true}
                         displayFormat="yyyy/MM/dd"
                         returnFormat="yyyy-MM-dd"
-                        onChange={(v)=>{this.setState({value: v})}}
+                        onChange={(v)=>{this.setState({valueScroll: v})}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.value}</span></p>
+                    <p>Selected: <span className="value">{this.state.valueScroll}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueScroll: '2020-02-02'})
+                    }}>Set date to 2020-02-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueScroll: null})
+                    }}>Clear</span>
+                    </p>
                     <p>Props</p>
                     <pre>
                         autoPosition= <span className="pl-k">true</span><br/>
@@ -68,6 +77,14 @@ class Page extends React.Component {
                 </div>
                 <div className="col col2">
                     <p>Selected: <span className="value">{this.state.value}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({value: '2020-02-02'})
+                    }}>Set date to 2020-02-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({value: null})
+                    }}>Clear</span>
+                    </p>
                     <p>Props</p>
                     <pre>
                         autoPosition= <span className="pl-k">true</span><br/>
@@ -86,19 +103,27 @@ class Page extends React.Component {
                     <DatePicker
                         mode="day"
                         min="2015-05-20"
-                        max="2016-05-20"
-                        value={this.state.value1}
+                        max="2030-05-20"
+                        value={this.state.valueDay}
                         returnFormat="yyyy-MM-dd"
-                        onChange={(v)=>{this.setState({value1: v})}}
+                        onChange={(v)=>{this.setState({valueDay: v})}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.value1}</span></p>
+                    <p>Selected: <span className="value">{this.state.valueDay}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueDay: '2020-02-02'})
+                    }}>Set date to 2020-02-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueDay: null})
+                    }}>Clear</span>
+                    </p>
                     <p>Props</p>
                     <pre>
                         mode= <span className="pl-s"><span className="pl-pds">"</span>day<span className="pl-pds">"</span></span><br/>
                         min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
-                        max= <span className="pl-s"><span className="pl-pds">"</span>2016-05-20<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2030-05-20<span className="pl-pds">"</span></span><br/>
                         returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
@@ -110,19 +135,27 @@ class Page extends React.Component {
                     <DatePicker
                         mode="month"
                         min="2015-05"
-                        max="2016-05"
+                        max="2030-05"
                         returnFormat="yyyy-MM"
-                        value={this.state.value2}
-                        onChange={(v)=>{this.setState({value2: v})}}
+                        value={this.state.valueMonth}
+                        onChange={(v)=>{this.setState({valueMonth: v})}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.value2}</span></p>
+                    <p>Selected: <span className="value">{this.state.valueMonth}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueMonth: '2020-02'})
+                    }}>Set date to 2020-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueMonth: null})
+                    }}>Clear</span>
+                    </p>
                     <p>Props</p>
                     <pre>
                         mode= <span className="pl-s"><span className="pl-pds">"</span>month<span className="pl-pds">"</span></span><br/>
                         min= <span className="pl-s"><span className="pl-pds">"</span>2015-05<span className="pl-pds">"</span></span><br/>
-                        max= <span className="pl-s"><span className="pl-pds">"</span>2016-05<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2030-05<span className="pl-pds">"</span></span><br/>
                         returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
@@ -134,19 +167,27 @@ class Page extends React.Component {
                     <DatePicker
                         mode="year"
                         min="2015"
-                        max="2016"
+                        max="2030"
                         returnFormat="yyyy"
-                        value={this.state.value3}
-                        onChange={(v)=>{this.setState({value3: v})}}
+                        value={this.state.valueYear}
+                        onChange={(v)=>{this.setState({valueYear: v})}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.value3}</span></p>
+                    <p>Selected: <span className="value">{this.state.valueYear}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueYear: '2020-02'})
+                    }}>Set date to 2020</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueYear: null})
+                    }}>Clear</span>
+                    </p>
                     <p>Props</p>
                     <pre>
                         mode= <span className="pl-s"><span className="pl-pds">"</span>year<span className="pl-pds">"</span></span><br/>
                         min= <span className="pl-s"><span className="pl-pds">"</span>2015<span className="pl-pds">"</span></span><br/>
-                        max= <span className="pl-s"><span className="pl-pds">"</span>2016<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2030<span className="pl-pds">"</span></span><br/>
                         returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
