@@ -11,7 +11,7 @@ npm install rc-date-core --save
 ## Props
 ### date picker props
 - **onChange** (func) return string value formatted by prop 'mode' and 'returnFormat'
-- **value** (string) initial date value e.g. 'yyyy/MM/dd'
+- **value** (string) date value of input e.g. 'yyyy/MM/dd'
 - **min** (string) min date limit depended on mode e.g. '2015/01/01'
 - **max** (string) max date limit same as above
 - **mode** (string default 'day')  'year' 'month' 'day' as 'year' just a year picker
@@ -22,6 +22,7 @@ npm install rc-date-core --save
 - ...any props above
 - **autoPosition** (bool default false) enable picker changing position when scrolling
 - **preferPosition** (string default "bottomLeft") initial position of picker(als0 will affect autoPosition when enabled)
+- **container** (selector or element default window) scroll container for autoPosition
 - **closeOnSelect** (bool default true) close picker when select
 - **closeOnClickOutside** (bool default true) close picker when click outside
 - **displayFormat** (string) e.g. 'yyyy/MM/dd' input value display, if none provided, just decided by 'mode'
@@ -32,7 +33,7 @@ npm install rc-date-core --save
 ```es6
 import {DatePicker} from 'rc-date-core'
 // use dark skin
-import {DatePicker, DatePickerInput} from './src'
+import Styles from './node_modules/rc-date-core/dist/darkInput.css'
 class Demo extends React.Component{
     constructor(){
         this.state = {
@@ -57,6 +58,7 @@ class Demo extends React.Component{
                     value={this.state.inputValue}
                     readOnly={true}
                     autoPosition={true}
+                    container={window}
                     preferPosition="bottomRight"
                     closeOnSelect={true}
                     closeOnClickOutside={true}
