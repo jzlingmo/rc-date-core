@@ -16,7 +16,11 @@ const propTypes = {
     onChange: PropTypes.func,
     onShow: PropTypes.func,
     onHide: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.instanceOf(Date)
+    ]),
     mode: PropTypes.string, // 'year' 'month' 'day' as 'year' just a year picker
     min: PropTypes.string,
     max: PropTypes.string,

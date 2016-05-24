@@ -10,10 +10,11 @@ class Page extends React.Component {
         super(props);
         this.state = {
             valueScroll: '2016-03-14',
-            value: '2016-03-14',
-            valueDay: '2016-03-12',
+            value: new Date(),
+            valueNumber: Date.now(),
+            valueDay: '2016-03-14',
             valueMonth: '2016-03',
-            valueYear: '2016',
+            valueYear: new Date(),
         };
     }
 
@@ -48,6 +49,7 @@ class Page extends React.Component {
                     </p>
                     <p>Props</p>
                     <pre>
+                        value= <span className="pl-s"><span className="pl-pds">"</span>2016-03-14<span className="pl-pds">"</span></span><br/>
                         autoPosition= <span className="pl-k">true</span><br/>
                         container= <span className="pl-k">'#scrollContainer'</span><br/>
                         preferPosition= <span className="pl-s"><span className="pl-pds">"</span>topLeft<span className="pl-pds">"</span></span><br/>
@@ -72,11 +74,11 @@ class Page extends React.Component {
                         closeOnClickOutside={true}
                         displayFormat="yyyy年M月d日"
                         returnFormat="yyyy-MM-dd"
-                        onChange={(v)=>{this.setState({value: v})}}
+                        onChange={(v, date)=>{this.setState({value: date})}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.value}</span></p>
+                    <p>Selected: <span className="value">{this.state.value && this.state.value.toString()}</span></p>
                     <p className="btn-group">
                         <span className="btn" onClick={()=>{
                         this.setState({value: '2020-02-02'})
@@ -87,12 +89,51 @@ class Page extends React.Component {
                     </p>
                     <p>Props</p>
                     <pre>
+                        value= <span className="pl-k">new </span>Date()<br/>
                         autoPosition= <span className="pl-k">true</span><br/>
                         preferPosition= <span className="pl-s"><span className="pl-pds">"</span>bottomRight<span className="pl-pds">"</span></span><br/>
                         closeOnSelect= <span className="pl-k">true</span><br/>
                         closeOnClickOutside= <span className="pl-k">true</span><br/>
-                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
-                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy年M月d日<span className="pl-pds">"</span></span><br/>
+                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy年M月d日<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>Date input(different type of value)</h3>
+            <div className="section">
+                <div className="col col1">
+                    <DatePickerInput
+                        value={this.state.valueNumber}
+                        readOnly={true}
+                        autoPosition={true}
+                        preferPosition="bottomRight"
+                        closeOnSelect={true}
+                        closeOnClickOutside={true}
+                        displayFormat="yyyy年M月d日"
+                        returnFormat="yyyy-MM-dd"
+                        onChange={(v, date)=>{this.setState({valueNumber: date && date.getTime()})}}
+                    />
+                </div>
+                <div className="col col2">
+                    <p>Selected: <span className="value">{this.state.valueNumber && this.state.valueNumber.toString()}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({value: '2020-02-02'})
+                    }}>Set date to 2020-02-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({value: null})
+                    }}>Clear</span>
+                    </p>
+                    <p>Props</p>
+                    <pre>
+                        value= Date.now()<br/>
+                        autoPosition= <span className="pl-k">true</span><br/>
+                        preferPosition= <span className="pl-s"><span className="pl-pds">"</span>bottomRight<span className="pl-pds">"</span></span><br/>
+                        closeOnSelect= <span className="pl-k">true</span><br/>
+                        closeOnClickOutside= <span className="pl-k">true</span><br/>
+                        displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy年M月d日<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
@@ -170,11 +211,11 @@ class Page extends React.Component {
                         max="2030"
                         returnFormat="yyyy"
                         value={this.state.valueYear}
-                        onChange={(v)=>{this.setState({valueYear: v})}}
+                        onChange={(v, date)=>{this.setState({valueYear: date});}}
                     />
                 </div>
                 <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.valueYear}</span></p>
+                    <p>Selected: <span className="value">{this.state.valueYear && this.state.valueYear.toString()}</span></p>
                     <p className="btn-group">
                         <span className="btn" onClick={()=>{
                         this.setState({valueYear: '2020-02'})
