@@ -7,9 +7,12 @@
   -ms-user-select: none
   user-select: none
   display: inline-block
-  font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
   font-size: $baseSize
   color: $baseColor
+  *
+    box-sizing: content-box
+    
   .rcdate-container
     width: $containerWidth
     border: $containerBorder
@@ -31,7 +34,7 @@
       padding: 0.5em
       .day
         float: left
-        width: ( 100% / 7 )
+        width: (100% / 7)
         cursor: default
 
     .rcdate-display
@@ -39,7 +42,7 @@
       height: $navHeight
       padding: $padding
       text-align: center
-      &,.rcdate-label,.rcdate-btn
+      &, .rcdate-label, .rcdate-btn
         line-height: $navHeight - 2 * $btnPadding
 
       .rcdate-label
@@ -88,7 +91,7 @@
     cursor: pointer
 
   .rcdate-picker.day
-    width: ( 100% / 7 )
+    width: (100% / 7)
     height: $dayHeight
     line-height: $dayHeight
 
