@@ -43,15 +43,15 @@ export default class DatePicker extends React.Component {
         return format(value, this.props.returnFormat || getModeFormat(this.props.mode))
     }
 
-    onChange(value, view) {
+    onChange(dateValue, view) {
         this.setState({
-            innerValue: value
+            innerValue: dateValue
         });
         if (view === this.props.mode) {
             this.setState({
-                value: new Date(value)
+                value: new Date(dateValue)
             });
-            this.props.onChange(this.getReturnValue(value))
+            this.props.onChange(this.getReturnValue(dateValue), dateValue)
         }
     }
 

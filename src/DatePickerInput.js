@@ -54,8 +54,8 @@ export default class DatePickerInput extends React.Component {
         this._preferTop = props.preferPosition.indexOf('top') !== -1;
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.value !== this.props.value){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
             this.setState({
                 value: this.getDisplayValue(nextProps.value)
             })
@@ -70,16 +70,16 @@ export default class DatePickerInput extends React.Component {
         return format(value, this.props.returnFormat || getModeFormat(this.props.mode))
     }
 
-    onChange(value) { // formatted date string
+    onChange(formatValue, dateValue) {
         this.setState({
-            value: this.getDisplayValue(value)
+            value: this.getDisplayValue(formatValue)
         });
         if (this.props.closeOnSelect) {
             this.setState({
                 show: false
             });
         }
-        this.props.onChange(this.getReturnValue(value))
+        this.props.onChange(this.getReturnValue(formatValue), dateValue)
     }
 
     hidePicker() {

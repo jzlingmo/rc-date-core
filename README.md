@@ -10,7 +10,7 @@ npm install rc-date-core --save
 
 ## Props
 ### date picker props
-- **onChange** (func) return string value formatted by prop 'mode' and 'returnFormat'
+- **onChange** (func) return string value formatted by prop 'mode' and 'returnFormat' and date object
 - **value** (string) date value of input e.g. 'yyyy/MM/dd'
 - **min** (string) min date limit depended on mode e.g. '2015/01/01'
 - **max** (string) max date limit same as above
