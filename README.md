@@ -1,4 +1,4 @@
-# rc-date-core
+# rc-date-core ![npm version](https://img.shields.io/npm/v/rc-date-core.svg?style=flat)
 A compact and delicate crafted core of date input.
 
 <img src="http://7xib2u.com1.z0.glb.clouddn.com/daypicker.png" width="236"/>
