@@ -8,13 +8,22 @@ import locale from './locale/zh-cn'
 
 import {getDate, format, getModeFormat} from './utils/date'
 
+const TIME_VIEWS = ['hour', 'minute', 'second'];
+
+const getInitialView = (mode)=> {
+    if (TIME_VIEWS.indexOf(mode) !== -1) {
+        return 'day'
+    }
+    return mode
+};
+
 export default class DatePicker extends React.Component {
 
     constructor(props) {
         super(props);
         let value = getDate(props.value); // get initial value
         let innerValue = value || new Date(); // initial view value
-        let view = props.mode;  // inital view mode
+        let view = getInitialView(props.mode);  // inital view mode
         this.state = {
             value: value,
             innerValue: innerValue,
@@ -23,8 +32,8 @@ export default class DatePicker extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.value !== this.props.value){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
             let value = getDate(nextProps.value);
             this.setState({
                 value: value,
@@ -47,7 +56,13 @@ export default class DatePicker extends React.Component {
         this.setState({
             innerValue: dateValue
         });
-        if (view === this.props.mode) {
+        let shouldChange = false;
+        if(TIME_VIEWS.indexOf(this.props.mode) === -1){
+            shouldChange = this.props.mode === view
+        }else{ // has time picker
+            shouldChange = ['day', 'time'].indexOf(view) !== -1
+        }
+        if(shouldChange){
             this.setState({
                 value: new Date(dateValue)
             });
@@ -61,68 +76,31 @@ export default class DatePicker extends React.Component {
         })
     }
 
-    renderYearPicker() {
-        return <YearPicker
-            value={this.state.value}
-            innerValue={this.state.innerValue}
-            view={this.state.view}
-            mode={this.props.mode}
-            min={this.props.min}
-            max={this.props.max}
-            onChange={this.onChange.bind(this)}
-            onChangeView={this.onChangeView.bind(this)}
-            locale={this.state.locale}
-        />
-    }
-
-    renderMonthPicker() {
-        return <MonthPicker
-            value={this.state.value}
-            innerValue={this.state.innerValue}
-            view={this.state.view}
-            mode={this.props.mode}
-            min={this.props.min}
-            max={this.props.max}
-            onChange={this.onChange.bind(this)}
-            onChangeView={this.onChangeView.bind(this)}
-            locale={this.state.locale}
-        />
-    }
-
-    renderDayPicker() {
-        return <DayPicker
-            value={this.state.value}
-            innerValue={this.state.innerValue}
-            view={this.state.view}
-            mode={this.props.mode}
-            min={this.props.min}
-            max={this.props.max}
-            onChange={this.onChange.bind(this)}
-            onChangeView={this.onChangeView.bind(this)}
-            locale={this.state.locale}
-        />
-    }
-
     render() {
         let t = this;
+        let state = t.state;
         let props = t.props;
-        let picker;
-        switch (t.state.view) {
-            case 'year':
-                picker = t.renderYearPicker();
-                break;
-            case 'month':
-                picker = t.renderMonthPicker();
-                break;
-            case 'day': // fall through
-            default:
-                picker = t.renderDayPicker();
-                break;
-        }
+        let pickerMap = {
+            'year': YearPicker,
+            'month': MonthPicker,
+            'day': DayPicker,
+        };
+        let Picker = pickerMap[t.state.view] || pickerMap['day'];
+        let pickerProps = {
+            value: state.value,
+            innerValue: state.innerValue,
+            view: state.view,
+            mode: props.mode,
+            min: props.min,
+            max: props.max,
+            onChange: t.onChange.bind(t),
+            onChangeView: t.onChangeView.bind(t),
+            locale: state.locale,
+        };
         return (
             <div className={cx('rcdate', props.className, {floating: props.floating} )}
                  onClick={t.stopPropagation.bind(t)}
-            >{picker}</div>
+            ><Picker {...pickerProps} /></div>
         )
     }
 }
@@ -140,7 +118,7 @@ DatePicker.propTypes = {
         PropTypes.number,
         PropTypes.instanceOf(Date)
     ]),
-    mode: PropTypes.string, // 'year' 'month' 'day' as 'year' just a year picker
+    mode: PropTypes.oneOf(['year', 'month', 'day', 'hour', 'minute', 'second']),
     min: PropTypes.string,
     max: PropTypes.string,
     returnFormat: PropTypes.string,

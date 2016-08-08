@@ -12,6 +12,7 @@ class Page extends React.Component {
             valueScroll: '2016-03-14',
             value: new Date(),
             valueNumber: Date.now(),
+            valueFullDay: '2016-03-14 12:12',
             valueDay: '2016-03-14',
             valueMonth: '2016-03',
             valueYear: new Date(),
@@ -110,7 +111,7 @@ class Page extends React.Component {
                         preferPosition="bottomRight"
                         closeOnSelect={true}
                         closeOnClickOutside={true}
-                        displayFormat="yyyy年M月d日"
+                        displayFormat="yyyy年M月d日 HH:mm"
                         returnFormat="yyyy-MM-dd"
                         onChange={(v, date)=>{this.setState({valueNumber: date && date.getTime()})}}
                     />
@@ -119,10 +120,10 @@ class Page extends React.Component {
                     <p>Selected: <span className="value">{this.state.valueNumber && this.state.valueNumber.toString()}</span></p>
                     <p className="btn-group">
                         <span className="btn" onClick={()=>{
-                        this.setState({value: '2020-02-02'})
+                        this.setState({valueNumber: '2020-02-02'})
                     }}>Set date to 2020-02-02</span>
                         <span className="btn" onClick={()=>{
-                        this.setState({value: null})
+                        this.setState({valueNumber: null})
                     }}>Clear</span>
                     </p>
                     <p>Props</p>
@@ -166,6 +167,38 @@ class Page extends React.Component {
                         min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
                         max= <span className="pl-s"><span className="pl-pds">"</span>2030-05-20<span className="pl-pds">"</span></span><br/>
                         returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>Day picker(With hour&minute)</h3>
+            <div className="section">
+                <div className="col col1">
+                    <DatePicker
+                        mode="minute"
+                        min="2015-05-20"
+                        max="2030-05-20"
+                        value={this.state.valueFullDay}
+                        returnFormat="yyyy-MM-dd HH:mm"
+                        onChange={(v)=>{this.setState({valueFullDay: v})}}
+                    />
+                </div>
+                <div className="col col2">
+                    <p>Selected: <span className="value">{this.state.valueFullDay}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueFullDay: '2020-02-02 13:00'})
+                    }}>Set date to 2020-02-02 13:00</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueFullDay: null})
+                    }}>Clear</span>
+                    </p>
+                    <p>Props</p>
+                    <pre>
+                        mode= <span className="pl-s"><span className="pl-pds">"</span>minute<span className="pl-pds">"</span></span><br/>
+                        min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2030-05-20<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd HH:mm<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
