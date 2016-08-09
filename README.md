@@ -14,7 +14,7 @@ npm install rc-date-core --save
 - **value** (string, date object, int) date value of input e.g. 'yyyy/MM/dd' , 1464081349000
 - **min** (string) min date limit depended on mode e.g. '2015/01/01'
 - **max** (string) max date limit same as above
-- **mode** (string default 'day')  'year' 'month' 'day' as 'year' just a year picker
+- **mode** (string default 'day')  'year' 'month' 'day' 'hour' 'minute' 'second'
 - **returnFormat** (string) e.g. 'yyyy/MM/dd' if none provided, just decided by 'mode'
 - **className** (string)
 
