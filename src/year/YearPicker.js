@@ -4,8 +4,8 @@ import cx from 'classnames';
 import PickerHead from '../common/PickerHead'
 import PickerItem from '../common/PickerItem'
 import PickerWrapper from '../common/PickerWrapper'
-import {compareDate, format, add} from '../utils/date'
-import {range, matrix} from '../utils/util'
+import { compareDate, format, add, set } from '../utils/date'
+import { range, matrix } from '../utils/util'
 
 const RowNum = 3;
 const ColNum = 4;
@@ -29,11 +29,12 @@ class YearPicker extends React.Component {
 
     getYears() {
         let value = this.props.value;
+        let innerValue = this.props.innerValue;
         let view = this.props.view;
         let baseYear = this.getBase();
 
         let years = range(baseYear, 10).map((year) => {
-            let date = new Date(year, 0);
+            let date = set(innerValue, year, 'year');
             return {
                 value: date,
                 current: true,

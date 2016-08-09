@@ -153,7 +153,7 @@ class Page extends React.Component {
                         mode="minute"
                         displayFormat="yyyy年M月d日 HH:mm"
                         returnFormat="yyyy-MM-dd HH:mm"
-                        onChange={(v, date)=>{this.setState({valueTime: date && date.getTime()})}}
+                        onChange={(v, date)=>{this.setState({valueTime: v})}}
                     />
                 </div>
                 <div className="col col2">

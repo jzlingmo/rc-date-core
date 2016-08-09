@@ -26,18 +26,20 @@ let methodMap = {
 };
 
 export function add(date, num, type) {
+    date = new Date(date);
     type = methodMap[type];
     let getter = 'get' + type;
     let setter = 'set' + type;
     date[setter](date[getter]() + num);
-    return new Date(date)
+    return date
 }
 
 export function set(date, num, type){
+    date = new Date(date);
     type = methodMap[type];
     let setter = 'set' + type;
     date[setter](num);
-    return new Date(date)
+    return date
 }
 
 export function get(date, type){

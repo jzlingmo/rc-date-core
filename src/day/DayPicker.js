@@ -4,7 +4,7 @@ import cx from 'classnames';
 import PickerHead from '../common/PickerHead'
 import PickerItem from '../common/PickerItem'
 import PickerWrapper from '../common/PickerWrapper'
-import { daysInMonth, getDate, compareDate, format, add } from '../utils/date'
+import { daysInMonth, getDate, compareDate, format, add, set } from '../utils/date'
 import { range, matrix } from '../utils/util'
 import { isTimeView } from '../utils/view'
 
@@ -40,20 +40,21 @@ class DayPicker extends React.Component {
         let prevCount = new Date(year, month).getDay();
         let nextCount = RowNum * ColNum - currentDaysCount - prevCount;
         let days = range(prevDaysCount - prevCount, prevCount).map(day => {
-            let date = new Date(year, month - 1, day);
+            let date = set(add(innerValue, -1, 'month'), day, 'day');
             return {
                 value: date,
                 selected: false,
             }
         }).concat(range(1, currentDaysCount).map(day => {
-            let date = new Date(year, month, day);
+            let date = set(innerValue, day, 'day');
+            console.log(date);
             return {
                 value: date,
                 selected: compareDate(date, value, view) === 0,
                 current: true,
             }
         })).concat(range(1, nextCount).map(day => {
-            let date = new Date(year, month + 1, day);
+            let date = set(add(innerValue, 1, 'month'), day, 'day');
             return {
                 value: date,
                 selected: false,
