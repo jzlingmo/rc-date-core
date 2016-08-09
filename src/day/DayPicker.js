@@ -47,7 +47,6 @@ class DayPicker extends React.Component {
             }
         }).concat(range(1, currentDaysCount).map(day => {
             let date = set(innerValue, day, 'day');
-            console.log(date);
             return {
                 value: date,
                 selected: compareDate(date, value, view) === 0,

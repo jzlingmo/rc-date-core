@@ -10,14 +10,12 @@ import locale from './locale/zh-cn'
 import { getDate, format, getModeFormat } from './utils/date'
 import { isTimeView } from './utils/view'
 
-const TIME_VIEWS = ['hour', 'minute', 'second'];
-
 export default class DatePicker extends React.Component {
 
     constructor(props) {
         super(props);
         let value = getDate(props.value); // get initial value
-        let innerValue = value || new Date(); // initial view value
+        let innerValue = value || this.getInitialValue(); // initial view value
         let view = isTimeView(props.mode) ? 'day' : props.mode;  // inital view mode
         this.state = {
             value: value,
@@ -27,12 +25,21 @@ export default class DatePicker extends React.Component {
         };
     }
 
+    getInitialValue() {
+        let date = new Date();
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        return date
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             let value = getDate(nextProps.value);
             this.setState({
                 value: value,
-                innerValue: value || new Date()
+                innerValue: value || this.getInitialValue()
             })
         }
     }

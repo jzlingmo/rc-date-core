@@ -26,7 +26,10 @@ let methodMap = {
 };
 
 export function add(date, num, type) {
-    date = new Date(date);
+    date = getDate(date);
+    if(date == null){
+        return null
+    }
     type = methodMap[type];
     let getter = 'get' + type;
     let setter = 'set' + type;
@@ -35,7 +38,10 @@ export function add(date, num, type) {
 }
 
 export function set(date, num, type){
-    date = new Date(date);
+    date = getDate(date);
+    if(date == null){
+        return null
+    }
     type = methodMap[type];
     let setter = 'set' + type;
     date[setter](num);
@@ -43,6 +49,10 @@ export function set(date, num, type){
 }
 
 export function get(date, type){
+    date = getDate(date);
+    if(date == null){
+        return null
+    }
     type = methodMap[type];
     let getter = 'get' + type;
     return date[getter]()

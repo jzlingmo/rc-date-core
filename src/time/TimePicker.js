@@ -19,11 +19,6 @@ const processTimeValue = (value, range)=> {
 class TimePicker extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            hours: props.innerValue.getHours(),
-            minutes: props.innerValue.getMinutes(),
-            seconds: props.innerValue.getSeconds(),
-        }
     }
 
     onChangeValue(viewName, value) {
@@ -45,7 +40,7 @@ class TimePicker extends React.Component {
         for (let i = 0; i < inputCount; i++) {
             let viewName = TIME_VIEWS[i];
             inputs.push({
-                value: get(this.props.innerValue, viewName),
+                value: get(this.props.value, viewName) || 0,
                 view: viewName,
             })
         }
