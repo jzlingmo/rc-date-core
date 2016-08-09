@@ -1,21 +1,16 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import cx from 'classnames';
 
 import YearPicker from './year/YearPicker'
 import MonthPicker from './month/MonthPicker'
 import DayPicker from './day/DayPicker'
+import TimePicker from './time/TimePicker'
 import locale from './locale/zh-cn'
 
-import {getDate, format, getModeFormat} from './utils/date'
+import { getDate, format, getModeFormat } from './utils/date'
+import { isTimeView } from './utils/view'
 
 const TIME_VIEWS = ['hour', 'minute', 'second'];
-
-const getInitialView = (mode)=> {
-    if (TIME_VIEWS.indexOf(mode) !== -1) {
-        return 'day'
-    }
-    return mode
-};
 
 export default class DatePicker extends React.Component {
 
@@ -23,7 +18,7 @@ export default class DatePicker extends React.Component {
         super(props);
         let value = getDate(props.value); // get initial value
         let innerValue = value || new Date(); // initial view value
-        let view = getInitialView(props.mode);  // inital view mode
+        let view = isTimeView(props.mode) ? 'day' : props.mode;  // inital view mode
         this.state = {
             value: value,
             innerValue: innerValue,
@@ -57,12 +52,12 @@ export default class DatePicker extends React.Component {
             innerValue: dateValue
         });
         let shouldChange = false;
-        if(TIME_VIEWS.indexOf(this.props.mode) === -1){
-            shouldChange = this.props.mode === view
-        }else{ // has time picker
+        if (isTimeView(this.props.mode)) {
             shouldChange = ['day', 'time'].indexOf(view) !== -1
+        } else {
+            shouldChange = this.props.mode === view
         }
-        if(shouldChange){
+        if (shouldChange) {
             this.setState({
                 value: new Date(dateValue)
             });
@@ -84,6 +79,7 @@ export default class DatePicker extends React.Component {
             'year': YearPicker,
             'month': MonthPicker,
             'day': DayPicker,
+            'time': TimePicker,
         };
         let Picker = pickerMap[t.state.view] || pickerMap['day'];
         let pickerProps = {

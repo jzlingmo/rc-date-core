@@ -11,12 +11,12 @@ export default class PickerHead extends React.Component {
         return (
             <div className="rcdate-head">
                 <div className="rcdate-display">
-                    <div className="rcdate-btn btn-left"
-                         onClick={props.onPrev}> &lt; </div>
+                    {props.onPrev ? <div className="rcdate-btn btn-left"
+                                         onClick={props.onPrev}> &lt; </div> : null}
                     <div className="rcdate-label"
                          onClick={props.onLabelClick}>{props.label}</div>
-                    <div className="rcdate-btn btn-right"
-                         onClick={props.onNext}> &gt; </div>
+                    {props.onNext ? <div className="rcdate-btn btn-right"
+                                         onClick={props.onNext}> &gt; </div> : null}
                 </div>
                 {props.children}
             </div>
@@ -27,8 +27,11 @@ export default class PickerHead extends React.Component {
 PickerHead.defaultProps = {};
 
 PickerHead.propTypes = {
-    onPrev: PropTypes.func.isRequired,
-    onNext: PropTypes.func.isRequired,
+    onPrev: PropTypes.func,
+    onNext: PropTypes.func,
     onLabelClick: PropTypes.func.isRequired,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element,
+    ]),
 };

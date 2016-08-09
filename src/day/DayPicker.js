@@ -4,8 +4,9 @@ import cx from 'classnames';
 import PickerHead from '../common/PickerHead'
 import PickerItem from '../common/PickerItem'
 import PickerWrapper from '../common/PickerWrapper'
-import {daysInMonth, getDate, compareDate, format, add} from '../utils/date'
-import {range, matrix} from '../utils/util'
+import { daysInMonth, getDate, compareDate, format, add } from '../utils/date'
+import { range, matrix } from '../utils/util'
+import { isTimeView } from '../utils/view'
 
 const RowNum = 6;
 const ColNum = 7;
@@ -93,6 +94,16 @@ class DayPicker extends React.Component {
         )
     }
 
+    renderFoot() {
+        if(!isTimeView(this.props.mode)){
+           return null
+        }
+        return <div className="rcdate-foot rcdate-picker time"
+                    onClick={this.onForwardView.bind(this, 1)}>
+            <i className="rcdate-icon-clock" />
+        </div>
+    }
+
     render() {
         return (
             <div className="rcdate-container">
@@ -103,6 +114,7 @@ class DayPicker extends React.Component {
                     label={format(this.props.innerValue, 'yyyy-MM')}
                 >{this.renderWeeks()}</PickerHead>
                 {this.renderBody()}
+                {this.renderFoot()}
             </div>
         )
     }

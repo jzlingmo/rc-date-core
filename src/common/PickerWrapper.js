@@ -1,37 +1,31 @@
 import React, {PropTypes} from 'react'
 import objectAssign from 'object-assign'
 
+import {
+    compareView,
+    getForwardView,
+    getViewFromMode,
+    ALL_VIEWS,
+} from '../utils/view'
+
 const PickerWrapper = (Component) => {
     objectAssign(Component.prototype, {
-        _viewList: ['decade', 'year', 'month', 'day'],
-        _compareView(viewA, viewB) {
-            let a = this._viewList.indexOf(viewA);
-            let b = this._viewList.indexOf(viewB);
-            if (a < b) {
-                return 1
-            } else if (a === b) {
-                return 0
-            } else {
-                return -1
-            }
-        },
-
-        _getForwardView(forwardStep){
-            let current = this.props.view;
-            let idx = this._viewList.indexOf(current);
-            return this._viewList[idx + forwardStep]
-        },
-
         onChange(date) {
-            this.props.onChange(date, this.props.view);
-            if (this._compareView(this.props.view, this.props.mode) > 0) {
-                this.props.onChangeView(this._getForwardView(1));
+            let view = this.props.view;
+            let toView = getViewFromMode(this.props.mode);
+            this.props.onChange(date, view);
+            if (compareView(view, toView) > 0) {
+                let forwardView = getForwardView(view, 1);
+                if(forwardView === 'time'){
+                    return
+                }
+                this.props.onChangeView(forwardView);
             }
         },
 
         onForwardView(forwardStep) {
-            let view = this._getForwardView(forwardStep);
-            if (!view || view === this._viewList[0]) {
+            let view = getForwardView(this.props.view, forwardStep);
+            if (!view || view === ALL_VIEWS[0]) {
                 return
             }
             this.props.onChangeView(view);

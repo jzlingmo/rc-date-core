@@ -12,7 +12,7 @@
   color: $baseColor
   *
     box-sizing: content-box
-    
+
   .rcdate-container
     width: $containerWidth
     border: $containerBorder
@@ -73,14 +73,22 @@
 
   .rcdate-body
     padding: $padding
-    font-size: $bodySize
+    font-size: 0
     background: $bodyBg
     border-bottom-left-radius: $radius
     border-bottom-right-radius: $radius
 
+  .rcdate-foot
+    padding: $padding
+    background: $bodyBg
+    border-bottom-left-radius: $radius
+    border-bottom-right-radius: $radius
+    text-align: center
+
   .rcdate-row
     display: inline-block
     width: 100%
+    font-size: $bodySize
 
   .rcdate-picker
     display: block
@@ -106,6 +114,9 @@
     margin: 1%
     height: $yearHeight
     line-height: $yearHeight
+
+  .rcdate-picker.time
+    float: none
 
   .rcdate-picker:hover
     background-color: $pickerHover
@@ -137,4 +148,36 @@
   .rcdate-btn:hover
     background-color: $pickerHover
 
+  .rcdate-time
+    display: table
+    border: none
+    border-collapse: collapse
+    width: 100%
+    text-align: center
 
+  .rcdate-time-item
+    display: table-cell
+    padding: 15px 0
+    border: none
+
+
+  .rcdate-time-input,
+  .rcdate-time-control
+    width: 50px
+    display: inline-block
+
+  .rcdate-time-control
+    margin: 5px 0
+    height: 30px
+    background-size: 20px
+
+  .rcdate-time-input
+    font-size: $inputSize
+    text-align: center
+    height: 60px
+    line-height: 60px
+    outline: none
+    border: 0
+    color: $pickerColor
+    background: $pickerHover
+    border-radius: $radius * 2

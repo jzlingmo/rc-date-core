@@ -21,7 +21,8 @@ let methodMap = {
     'month': 'Month',
     'day': 'Date',
     'hour': 'Hours',
-    'minute': 'Minutes'
+    'minute': 'Minutes',
+    'second': 'Seconds',
 };
 
 export function add(date, num, type) {
@@ -30,6 +31,19 @@ export function add(date, num, type) {
     let setter = 'set' + type;
     date[setter](date[getter]() + num);
     return new Date(date)
+}
+
+export function set(date, num, type){
+    type = methodMap[type];
+    let setter = 'set' + type;
+    date[setter](num);
+    return new Date(date)
+}
+
+export function get(date, type){
+    type = methodMap[type];
+    let getter = 'get' + type;
+    return date[getter]()
 }
 
 export function format(date, formatStr = 'yyyy/MM/dd') {
