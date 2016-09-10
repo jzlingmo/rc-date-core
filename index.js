@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 
 import {DatePicker, DatePickerInput} from './src'
-import Styles from './dist/lightGrey.css'
+import Styles from './dist/darkInput.css'
 import DemoStyles from './index.css'
 
 class Page extends React.Component {
