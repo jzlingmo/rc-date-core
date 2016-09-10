@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 
 import {DatePicker, DatePickerInput} from './src'
-import Styles from './dist/darkInput.css'
+import Styles from './dist/lightGrey.css'
 import DemoStyles from './index.css'
 
 class Page extends React.Component {
@@ -22,6 +22,38 @@ class Page extends React.Component {
 
     render() {
         return <div className="demos">
+            <h3>Day picker</h3>
+            <div className="section">
+                <div className="col col1">
+                    <DatePicker
+                        mode="day"
+                        min="2015-05-20"
+                        max="2030-05-20"
+                        value={this.state.valueDay}
+                        returnFormat="yyyy-MM-dd"
+                        onChange={(v)=>{this.setState({valueDay: v})}}
+                    />
+                </div>
+                <div className="col col2">
+                    <p>Selected: <span className="value">{this.state.valueDay}</span></p>
+                    <p className="btn-group">
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueDay: '2020-02-02'})
+                    }}>Set date to 2020-02-02</span>
+                        <span className="btn" onClick={()=>{
+                        this.setState({valueDay: null})
+                    }}>Clear</span>
+                    </p>
+                    <p>Props</p>
+                    <pre>
+                        mode= <span className="pl-s"><span className="pl-pds">"</span>day<span className="pl-pds">"</span></span><br/>
+                        min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
+                        max= <span className="pl-s"><span className="pl-pds">"</span>2030-05-20<span className="pl-pds">"</span></span><br/>
+                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
+                    </pre>
+                </div>
+            </div>
+
             <h3>Date input(auto position in scroll container)</h3>
             <div id="scrollContainer" className="wrapper-limited">
                 <div className="section">
@@ -176,38 +208,6 @@ class Page extends React.Component {
                         mode= <span className="pl-s"><span className="pl-pds">"</span>minute<span className="pl-pds">"</span></span><br/>
                         displayFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy年M月d日 HH:mm<span className="pl-pds">"</span></span><br/>
                         returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd HH:mm<span className="pl-pds">"</span></span><br/>
-                    </pre>
-                </div>
-            </div>
-
-            <h3>Day picker</h3>
-            <div className="section">
-                <div className="col col1">
-                    <DatePicker
-                        mode="day"
-                        min="2015-05-20"
-                        max="2030-05-20"
-                        value={this.state.valueDay}
-                        returnFormat="yyyy-MM-dd"
-                        onChange={(v)=>{this.setState({valueDay: v})}}
-                    />
-                </div>
-                <div className="col col2">
-                    <p>Selected: <span className="value">{this.state.valueDay}</span></p>
-                    <p className="btn-group">
-                        <span className="btn" onClick={()=>{
-                        this.setState({valueDay: '2020-02-02'})
-                    }}>Set date to 2020-02-02</span>
-                        <span className="btn" onClick={()=>{
-                        this.setState({valueDay: null})
-                    }}>Clear</span>
-                    </p>
-                    <p>Props</p>
-                    <pre>
-                        mode= <span className="pl-s"><span className="pl-pds">"</span>day<span className="pl-pds">"</span></span><br/>
-                        min= <span className="pl-s"><span className="pl-pds">"</span>2015-05-20<span className="pl-pds">"</span></span><br/>
-                        max= <span className="pl-s"><span className="pl-pds">"</span>2030-05-20<span className="pl-pds">"</span></span><br/>
-                        returnFormat= <span className="pl-s"><span className="pl-pds">"</span>yyyy-MM-dd<span className="pl-pds">"</span></span><br/>
                     </pre>
                 </div>
             </div>
